@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+{%block content%}
+
+    <div class="container">
+  <div class="content-section">
+    <form method="POST">
+        {% csrf_token %}
+        <section class="title">
+            <h3 class="welcome">Welcome to</h3>
+            HOMEBASE
+            <h5 class="hint">Registration Form</h5>
+        </section>
+        <br>
+        {{ form }}
+        <br>
+         <button class="btn btn-primary blue darken-3" type="submit">Sign up</button>
+        <small class="text-muted">
+        Already have an account? <a class="ml-2" href="{% url 'login' %}">Sign In </a>
+      </small>
+    </form>
+<div class="border-top pt-3">
+      <small class="text-muted">
+
+</small>
+    </div>
+  <br>
+  <br>
+  </div>
+    </div>
+
+
+
+
+{% endblock content%}

@@ -1,0 +1,90 @@
+{% extends "base2.html" %}
+{% load static %}
+{% block content %}
+    <div class="main">
+    <div class="container">
+
+    <div class="content-section">
+
+
+    {% for post in posts %}
+        <div class="row">
+            <div class="col m11">
+              <div class="card">
+                <div class="card-image waves-effect waves-block waves-light">
+                    {% if post.display_image.url %}
+                  <img src="{{ post.display_image.url }}" >
+                    {% endif %}
+                </div>
+                <div class="card-content">
+                    <span class="card-title activator grey-text text-darken-4">
+                        <img class="responsive-img circle" src="{{ post.user.profile.image.url }}" width="60" height="60">
+                    <b>{{ post.user }}</b>
+                    <br>
+                        <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
+                        <i class="material-icons right small">comment</i></span>
+
+                    Location: {{ post.town }} <br>
+                    Floor Number: {{ post.floor_number }} <br>
+                    Rooms: {{ post.rooms }} <br>
+                    Address: {{ post.address }} <br>
+                    Price: ${{ post.price }}<br>
+                    <br>
+                  <p>{{ post.content }}</p>
+                </div>
+                <div class="card-action">
+                     <a class="btn blue" href="#">Favorite</a>
+                </div>
+              <div class="card-reveal">
+              <span class="card-title grey-text text-darken-4"> Comments <i class="material-icons right">close</i></span>
+
+                <div class="card blue-grey darken-1">
+        <div class="card-content white-text">
+          <span class="card-title">Card Title</span>
+          <p>I am a very simple card. I am good at containing small bits of information.
+          I am convenient because I require little markup to use effectively.</p>
+        </div>
+        <div class="card-action">
+          <a href="#">This is a link</a>
+          <a href="#">This is a link</a>
+        </div>
+      </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+    {% endfor %}
+    <br>
+        {% if posts.has_other_pages %}
+
+      {% if posts.has_previous %}
+        <a class = "btn btn-outline-info mb-4" href="?page=1">First</a>
+        <a class = "btn btn-outline-info mb-4" href="?page={{ posts.previous_page_number }}">Previous</a>
+      {% endif %}
+
+      {% for num in posts.paginator.page_range %}
+        {% if posts.number == num %}
+          <a class = "btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+        {% elif num > posts.number|add:'-3' and num < posts.number|add:'3' %}
+          <a class = "btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+        {% endif %}
+      {% endfor %}
+
+      {% if posts.has_next %}
+        <a class = "btn btn-outline-info mb-4" href="?page={{ posts.next_page_number }}">Next</a>
+        <a class = "btn btn-outline-info mb-4" href="?page={{ posts.paginator.num_pages }}">Last</a>
+      {% endif %}
+
+    {% endif %}
+
+
+    <br>
+  </clr-dg-pagination>
+</clr-dg-footer>
+        </div>
+
+    </div>
+    </div>
+{% endblock content %}

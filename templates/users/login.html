@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+{%block content%}
+
+     <div class="container">
+  <div class="content-section">
+    <form method="post">
+        {% csrf_token %}
+            <h3 class="welcome">Welcome to</h3>
+            <h5 >HOMEBASE</h5>
+            <h5 class="hint">Sign in or create an account now</h5>
+        </section>
+        {{ form }}
+         <button class="btn btn-primary blue darken-3" type="submit">Login</button>
+        <small class="text-muted">
+        Need an account? <a class="ml-2" href="{% url 'register' %}">Sign Up Now</a>
+      </small>
+    </form>
+
+</div>
+     </div>
+
+{% endblock content%}
