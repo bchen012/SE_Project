@@ -2,6 +2,7 @@
 
 <html>
     <head>
+    <title>{% block title %}HOMEBASE{% endblock %}</title>
         <style>
         .center-fit {
             width: 2000px;
@@ -30,7 +31,7 @@
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li><a style="color: black" href="{% url 'main' %}">Home</a></li>
         <li><a style="color: black" href="{% url 'post-create' %}">Post</a></li>
-          <li><a style="color: black" href="#">Profile</a></li>
+          <li><a style="color: black" href="{% url 'profile'%}">Profile</a></li>
         <li><a style="color: black" href="{% url 'logout' %}">Logout</a></li>
       </ul>
     </div>

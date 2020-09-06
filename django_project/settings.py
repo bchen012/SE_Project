@@ -36,7 +36,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'users.apps.UsersConfig',
-    'Home'
+    'django.contrib.humanize',
+    'Home',
 ]
 
 MIDDLEWARE = [
@@ -119,3 +120,5 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/media')
 LOGIN_REDIRECT_URL = 'main'
+
+AUTH_PROFILE_MODULE = 'users.Profile'

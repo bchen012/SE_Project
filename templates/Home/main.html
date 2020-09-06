@@ -1,5 +1,6 @@
 {% extends "base2.html" %}
 {% load static %}
+{% load humanize %}
 {% block content %}
     <div class="main">
     <div class="container">
@@ -28,7 +29,7 @@
                     Floor Number: {{ post.floor_number }} <br>
                     Rooms: {{ post.rooms }} <br>
                     Address: {{ post.address }} <br>
-                    Price: ${{ post.price }}<br>
+                    Price: ${{ post.price|intcomma }}<br>
                     <br>
                   <p>{{ post.content }}</p>
                 </div>

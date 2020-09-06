@@ -1,0 +1,53 @@
+{% extends "base2.html" %}
+{% load static %}
+{% block content %}
+<head>
+  <style>
+    .banner
+    {
+        width: 100%;
+      z-index: -1;
+        border-radius: 2%;
+    }
+    .profile
+    {
+        border-radius: 50%;
+    }
+
+    .content {
+    width: 400px;
+    z-index: 1;
+    position: relative;
+    top: -100px;
+    left: 3%;
+}
+
+    .content img {
+        margin-right: 15px;
+        float: left;
+        z-index: 1;
+        border-radius: 50%;
+    }
+
+    .content h3{
+        color: white;
+    }
+  </style>
+</head>
+    <div class="container">
+        <div class="content-section">
+        <img class="banner" src={% static 'media/tech-banner.jpg' %}  height="350">
+
+        <div class="content">
+            <img src="{{ user.profile.image.url }}" width="120" height="120">
+            <h3>{{ user.username }}</h3>
+        </div>
+
+        <br>
+        <br>
+        <h5> Name: {{ user.first_name }} {{ user.last_name }}</h5>
+        <h5> Email: {{ user.email }}</h5>
+        <h5> Contact Number: {{ user.profile.contactNumber }}</h5>
+    </div>
+</div>
+{% endblock content %}

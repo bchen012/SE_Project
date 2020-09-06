@@ -24,11 +24,12 @@ from Home import views as home_views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    path('', user_views.register, name='register'),
-    path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
+    path('', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
+    path('register/', user_views.register, name='register'),
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
     path('main/', home_views.Main.as_view(), name='main'),
-    path('post/new/', home_views.PostCreateView.as_view(), name='post-create')
+    path('post/new/', home_views.PostCreateView.as_view(), name='post-create'),
+    path('profile/', user_views.profile, name='profile'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

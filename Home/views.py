@@ -19,26 +19,6 @@ class Main(LoginRequiredMixin, ListView):
         return context
 
 
-def main_page(request):
-    post_list = Post.objects.all().order_by('-date_posted')
-    page = request.GET.get('page', 1)
-
-    paginator = Paginator(post_list, 10)
-
-    try:
-        posts = paginator.page(page)
-    except PageNotAnInteger:
-        posts = paginator.page(1)
-    except EmptyPage:
-        posts = paginator.page(paginator.num_pages)
-
-    context = {
-        'posts': posts,  # pass in posts dict to 'posts' key in context dict
-    }
-
-    return render(request, 'Home/main.html', context)
-
-
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
     fields = ['town', 'floor_number', 'address', 'rooms', 'price', 'display_image']
@@ -49,3 +29,5 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 
     def get_success_url(self):
         return reverse('main')
+
+
