@@ -27,7 +27,7 @@
 <div class="navbar-fixed">
 <nav>
     <div class="nav-wrapper grey lighten-5">
-      <a href="#" class="brand-logo"><img src= "{% static 'media/Logo.png' %}"  width="200" height="60" }} ></a>
+      <a href="{% url 'main' %}" class="brand-logo"><img src= "{% static 'media/Logo.png' %}"  width="200" height="60" }} ></a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li><a style="color: black" href="{% url 'main' %}">Home</a></li>
         <li><a style="color: black" href="{% url 'post-create' %}">Post</a></li>
