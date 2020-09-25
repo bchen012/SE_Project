@@ -6,14 +6,16 @@ from django.contrib.auth.models import User
 
 
 class Post(models.Model):
-    content = models.TextField()
     date_posted = models.DateTimeField(default=timezone.now)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     town = models.TextField(null=True)
     floor_number = models.IntegerField(default=0)
     address = models.TextField(null=True)
+    flat_type = models.TextField(null=True)
+    floor_area = models.IntegerField(default=0)
+    remaining_lease = models.IntegerField(default=0)
     price = models.TextField(default=0)
-    rooms = models.IntegerField(default=2)
+    description = models.TextField()
     display_image = models.ImageField(upload_to='home_images', default='default_home.png')
     gallery_image_0 = models.ImageField(null=True, upload_to='home_images', default='default_home.png')
     gallery_image_1 = models.ImageField(null=True, upload_to='home_images', default='default_home.png')

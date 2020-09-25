@@ -7,7 +7,6 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import reverse
-from .forms import PostForm
 from django.http import HttpResponseRedirect
 
 
@@ -26,9 +25,8 @@ class Main(LoginRequiredMixin, ListView):
 
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
-    fields = ['town', 'floor_number', 'address', 'rooms', 'price', 'display_image',
-              'gallery_image_0', 'gallery_image_1', 'gallery_image_2',
-              'gallery_image_3']
+    fields = ['town', 'address', 'floor_number', 'flat_type', 'floor_area', 'remaining_lease', 'price', 'description',
+              'display_image', 'gallery_image_0', 'gallery_image_1', 'gallery_image_2', 'gallery_image_3']
 
     def form_valid(self, form):
         form.instance.user = self.request.user

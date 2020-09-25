@@ -60,14 +60,17 @@
 
       <div class="card grey lighten-3">
         <div class="card-content ">
-            <h4>${{ post.price|intcomma }}</h4>
+            <h5>${{ post.price|intcomma }}</h5>
             <span><i class="material-icons small">location_city</i> {{ post.town }} </span><br>
             <span><i class="material-icons small">location_on</i> {{ post.address }} </span> <br>
-            <span><i class="material-icons small">swap_vert</i> level {{ post.floor_number }} </span> <br>
-            <span><i class="material-icons small">view_compact</i> {{ post.rooms }} room </span> <br>
+            <span><i class="material-icons small">swap_vert</i> Level {{ post.floor_number }} </span> <br>
+            <span><i class="material-icons small">view_compact</i> {{ post.flat_type }} </span> <br>
+            <span><i class="material-icons small">straighten</i> {{ post.floor_area }} Square Feet </span> <br>
+            <span><i class="material-icons small">access_time</i> {{ post.remaining_lease }} Years </span> <br>
+
             <br>
-            {% if post.content %}
-            <span><i class="material-icons small">description</i>{{ post.content }}</span>
+            {% if post.description %}
+            <span><i class="material-icons small">description</i>{{ post.description }}</span>
             {% endif %}
         <br>
         <br>

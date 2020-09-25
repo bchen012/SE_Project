@@ -4,6 +4,10 @@
 {% block content %}
 <head>
   <style>
+      .material-icons{
+        display: inline-flex;
+        vertical-align: top;
+    }
     .banner
     {
         width: 100%;
@@ -66,8 +70,6 @@
 
 
         {% for post in profile.favorites.all %}
-                    <div class="row">
-            <div class="col m11">
               <div class="card">
                 <div class="card-image waves-effect waves-block waves-light">
                     {% if post.display_image.url %}
@@ -80,37 +82,24 @@
                     <b>{{ post.user }}</b>
                     <br>
                         <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
-                        <i class="material-icons right small">comment</i></span>
+                    </span>
+                    <h5>${{ post.price|intcomma }}</h5>
+                    <span><i class="material-icons small">location_city</i> {{ post.town }} </span><br>
+                    <span><i class="material-icons small">location_on</i> {{ post.address }} </span> <br>
+                    <span><i class="material-icons small">swap_vert</i> Level {{ post.floor_number }} </span> <br>
+                    <span><i class="material-icons small">view_compact</i> {{ post.flat_type }} </span> <br>
+                    <span><i class="material-icons small">straighten</i> {{ post.floor_area }} Square Feet </span> <br>
+                    <span><i class="material-icons small">access_time</i> {{ post.remaining_lease }} Years </span> <br>
 
-                    Location: {{ post.town }} <br>
-                    Floor Number: {{ post.floor_number }} <br>
-                    Rooms: {{ post.rooms }} <br>
-                    Address: {{ post.address }} <br>
-                    Price: ${{ post.price|intcomma }}<br>
                     <br>
-                  <p>{{ post.content }}</p>
+                    {% if post.description %}
+                    <span><i class="material-icons small">description</i>{{ post.description }}</span>
+                    {% endif %}
+                    <br>
                     <br>
                     <a class="waves-effect waves-light btn" href={% url 'unfavorite' post.id %}><i class="material-icons right"></i>unfavorite</a>
                 </div>
-              <div class="card-reveal">
-              <span class="card-title grey-text text-darken-4"> Comments <i class="material-icons right">close</i></span>
-
-                <div class="card blue-grey darken-1">
-        <div class="card-content white-text">
-          <span class="card-title">Card Title</span>
-          <p>I am a very simple card. I am good at containing small bits of information.
-          I am convenient because I require little markup to use effectively.</p>
-        </div>
-        <div class="card-action">
-          <a href="#">This is a link</a>
-          <a href="#">This is a link</a>
-        </div>
-      </div>
-
-                </div>
               </div>
-            </div>
-          </div>
         {% endfor %}
 
     </div>
