@@ -1,5 +1,6 @@
 {% extends "base2.html" %}
 {% load static %}
+{% load humanize %}
 {% block content %}
 <head>
   <style>
@@ -7,7 +8,6 @@
     {
         width: 100%;
       z-index: -1;
-        border-radius: 2%;
     }
     .profile
     {
@@ -63,6 +63,56 @@
             </form>
             </div>
           </div>
+
+
+        {% for post in profile.favorites.all %}
+                    <div class="row">
+            <div class="col m11">
+              <div class="card">
+                <div class="card-image waves-effect waves-block waves-light">
+                    {% if post.display_image.url %}
+                  <a href={% url 'view_post'  post.id %}><img src="{{ post.display_image.url }}" ></a>
+                    {% endif %}
+                </div>
+                <div class="card-content">
+                    <span class="card-title activator grey-text text-darken-4">
+                        <img class="responsive-img circle" src="{{ post.user.profile.image.url }}" width="60" height="60">
+                    <b>{{ post.user }}</b>
+                    <br>
+                        <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
+                        <i class="material-icons right small">comment</i></span>
+
+                    Location: {{ post.town }} <br>
+                    Floor Number: {{ post.floor_number }} <br>
+                    Rooms: {{ post.rooms }} <br>
+                    Address: {{ post.address }} <br>
+                    Price: ${{ post.price|intcomma }}<br>
+                    <br>
+                  <p>{{ post.content }}</p>
+                    <br>
+                    <a class="waves-effect waves-light btn" href={% url 'unfavorite' post.id %}><i class="material-icons right"></i>unfavorite</a>
+                </div>
+              <div class="card-reveal">
+              <span class="card-title grey-text text-darken-4"> Comments <i class="material-icons right">close</i></span>
+
+                <div class="card blue-grey darken-1">
+        <div class="card-content white-text">
+          <span class="card-title">Card Title</span>
+          <p>I am a very simple card. I am good at containing small bits of information.
+          I am convenient because I require little markup to use effectively.</p>
+        </div>
+        <div class="card-action">
+          <a href="#">This is a link</a>
+          <a href="#">This is a link</a>
+        </div>
+      </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+
     </div>
 </div>
 {% endblock content %}

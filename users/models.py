@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 from django.contrib.auth.models import User
 from django.db import models
 from PIL import Image
-
+from Home.models import Post
 
 def user_directory_path(instance, filename):
     # file will be uploaded to static / user_<id>/<filename>
@@ -14,7 +14,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     image = models.ImageField(default='default.jpg', upload_to='profile_pics')
     contactNumber = models.CharField(default="", max_length=8)
-
+    favorites = models.ManyToManyField(Post)
     def __str__(self):
         return '%s %s' % (self.user.username, '\'s Profile')
 

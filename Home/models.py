@@ -14,15 +14,11 @@ class Post(models.Model):
     address = models.TextField(null=True)
     price = models.TextField(default=0)
     rooms = models.IntegerField(default=2)
-    display_image = models.ImageField(default='default.jpg', null=True, upload_to='home_images')
+    display_image = models.ImageField(upload_to='home_images', default='default_home.png')
+    gallery_image_0 = models.ImageField(null=True, upload_to='home_images', default='default_home.png')
+    gallery_image_1 = models.ImageField(null=True, upload_to='home_images', default='default_home.png')
+    gallery_image_2 = models.ImageField(null=True, upload_to='home_images', default='default_home.png')
+    gallery_image_3 = models.ImageField(null=True, upload_to='home_images', default='default_home.png')
 
     def __str__(self):
-        return self.town
-
-
-class HomeImages(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    pic = models.ImageField(null=True, upload_to='home_images')
-
-    def __str__(self):
-        return self.post.content
+        return str(self.id)

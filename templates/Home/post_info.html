@@ -1,0 +1,149 @@
+{% extends "base2.html"%}
+{% load humanize %}
+{%block content%}
+<head>
+  <style>
+    .material-icons{
+        display: inline-flex;
+        vertical-align: top;
+    }
+    .banner
+    {
+        width: 100%;
+      z-index: -1;
+    }
+    div.gallery {
+        border: 1px solid #ccc;
+    }
+
+    div.gallery:hover {
+      border: 1px solid #777;
+    }
+
+    div.gallery img {
+      width: 100%;
+      height: auto;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    .responsive {
+      padding: 0 6px;
+      float: left;
+      width: 24.99999%;
+    }
+
+    @media only screen and (max-width: 700px) {
+      .responsive {
+        width: 49.99999%;
+        margin: 6px 0;
+      }
+    }
+
+    @media only screen and (max-width: 500px) {
+      .responsive {
+        width: 100%;
+      }
+    }
+
+
+  </style>
+</head>
+
+ <img class="banner" src="{{ post.display_image.url }}" >
+<div class="container">
+    <div class="content-section">
+
+    <h2>{{ post.town }}</h2>
+
+      <div class="card grey lighten-3">
+        <div class="card-content ">
+            <h4>${{ post.price|intcomma }}</h4>
+            <span><i class="material-icons small">location_city</i> {{ post.town }} </span><br>
+            <span><i class="material-icons small">location_on</i> {{ post.address }} </span> <br>
+            <span><i class="material-icons small">swap_vert</i> level {{ post.floor_number }} </span> <br>
+            <span><i class="material-icons small">view_compact</i> {{ post.rooms }} room </span> <br>
+            <br>
+            {% if post.content %}
+            <span><i class="material-icons small">description</i>{{ post.content }}</span>
+            {% endif %}
+        <br>
+        <br>
+        <br>
+
+        <a class="waves-effect waves-light btn" href={% url 'favorite' post.id %}><i class="material-icons right">
+            {% if favorited %}
+                favorite
+            {% else %}
+                favorite_border
+            {% endif %}
+        </i>favorite</a>
+
+        </div>
+      </div>
+
+
+{#      <div class="card">#}
+{#              <ul class="tabs">#}
+{#                <li class="tab col s3"><a href="#test1">Image 1     </a></li>#}
+{#                <li class="tab col s3"><a class="active" href="#test2">Image 2     </a></li>#}
+{#                <li class="tab col s3"><a href="#test3">Image 3     </a></li>#}
+{#                <li class="tab col s3"><a href="#test4">Image 4     </a></li>#}
+{#              </ul>#}
+{#            <div id="test1" class="col s12"><img class="banner" src="{{ post.gallery_image_0.url }}"></div>#}
+{#            <div id="test2" class="col s12"><img class="banner" src="{{ post.gallery_image_1.url }}"></div>#}
+{#            <div id="test3" class="col s12"><img class="banner" src="{{ post.gallery_image_2.url }}"></div>#}
+{#            <div id="test4" class="col s12"><img class="banner" src="{{ post.gallery_image_3.url }}"></div>#}
+{#      </div>#}
+{#      <script>#}
+{#        var el = document.querySelector('.tabs');#}
+{#        var instance = M.Tabs.init(el, {});#}
+{#      </script>#}
+
+
+
+
+<br>
+<br>
+
+<div class="responsive">
+  <div class="gallery">
+    <a target="_blank" href="{{ post.gallery_image_0.url }}">
+      <img class="banner" src="{{ post.gallery_image_0.url }}">
+    </a>
+  </div>
+</div>
+
+
+<div class="responsive">
+  <div class="gallery">
+    <a target="_blank" href="{{ post.gallery_image_1.url }}">
+      <img class="banner" src="{{ post.gallery_image_1.url }}">
+    </a>
+  </div>
+</div>
+
+<div class="responsive">
+  <div class="gallery">
+    <a target="_blank" href="{{ post.gallery_image_2.url }}">
+      <img class="banner" src="{{ post.gallery_image_2.url }}">
+    </a>
+  </div>
+</div>
+
+<div class="responsive">
+  <div class="gallery">
+    <a target="_blank" href="{{ post.gallery_image_3.url }}">
+      <img class="banner" src="{{ post.gallery_image_3.url }}">
+    </a>
+  </div>
+</div>
+
+    </div>
+</div>
+<br>
+
+
+{% endblock content %}

@@ -2,11 +2,11 @@
 from __future__ import unicode_literals
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
-from .models import Profile
+from .models import Profile, Post
 
 
 # Create your views here.
@@ -63,3 +63,10 @@ def profile(request):
     }
 
     return render(request, 'users/users_profile.html', context)
+
+
+def unfavorite(request, id):
+    post = get_object_or_404(Post, id=id)
+    profile = Profile.objects.get(user=request.user)
+    profile.favorites.remove(post)
+    return redirect('profile')
