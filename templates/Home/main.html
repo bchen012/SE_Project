@@ -1,8 +1,10 @@
 {% extends "base2.html" %}
 {% load static %}
 {% load humanize %}
-{% block content %}
 {% load plotly_dash %}
+{% block content %}
+
+
 <head>
 <style>
     .material-icons{
@@ -12,12 +14,20 @@
 
   </style>
 </head>
-
-
+{% if user.is_superuser %}
+  <nav>
+    <div class="nav-wrapper black">
+      <a href="{% url 'main' %}" class="brand-logo">Admin Menu</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="{% url 'updateData'%}">Update Data</a></li>
+      </ul>
+    </div>
+  </nav>
+{% endif %}
     <div class="main">
     <div class="container">
+    <br>
     <div class="content-section">
-
 
 {% for post in posts %}
         <div class="row">

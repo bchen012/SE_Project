@@ -33,6 +33,7 @@ urlpatterns = [
     path('view_post/<int:id>', home_views.postView, name='view_post'),
     path('favorite/<int:id>', home_views.favoritePost, name='favorite'),
     path('unfavorite/<int:id>', user_views.unfavorite, name='unfavorite'),
+    path('updateStats/', home_views.updateData, name='updateData'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
