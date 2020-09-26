@@ -2,7 +2,7 @@
 {% load static %}
 {% load humanize %}
 {% block content %}
-
+{% load plotly_dash %}
 <head>
 <style>
     .material-icons{
@@ -37,10 +37,7 @@
                         </span>
                     <h5>${{ post.price|intcomma }}</h5>
                     <span><i class="material-icons small">location_city</i> {{ post.town }} </span><br>
-                    <span><i class="material-icons small">location_on</i> {{ post.address }} </span> <br>
-                    <span><i class="material-icons small">swap_vert</i> Level {{ post.floor_number }} </span> <br>
                     <span><i class="material-icons small">view_compact</i> {{ post.flat_type }} </span> <br>
-                    <span><i class="material-icons small">straighten</i> {{ post.floor_area }} Square Feet </span> <br>
                     <span><i class="material-icons small">access_time</i> {{ post.remaining_lease }} Years </span> <br>
 
                     <br>

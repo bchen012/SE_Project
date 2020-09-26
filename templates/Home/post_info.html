@@ -12,8 +12,12 @@
         width: 100%;
       z-index: -1;
     }
+
     div.gallery {
-        border: 1px solid #ccc;
+      margin: 5px;
+      border: 1px solid #ccc;
+
+      width: 100%;
     }
 
     div.gallery:hover {
@@ -25,28 +29,17 @@
       height: auto;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+
 
     .responsive {
       padding: 0 6px;
-      float: left;
-      width: 24.99999%;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 30px;
+      width: 60%;
     }
 
-    @media only screen and (max-width: 700px) {
-      .responsive {
-        width: 49.99999%;
-        margin: 6px 0;
-      }
-    }
 
-    @media only screen and (max-width: 500px) {
-      .responsive {
-        width: 100%;
-      }
-    }
 
 
   </style>
@@ -110,11 +103,16 @@
 
 <br>
 <br>
+<h3>Gallery</h3>
+    </div>
+</div>
+
+
 
 <div class="responsive">
   <div class="gallery">
     <a target="_blank" href="{{ post.gallery_image_0.url }}">
-      <img class="banner" src="{{ post.gallery_image_0.url }}">
+      <img src="{{ post.gallery_image_0.url }}">
     </a>
   </div>
 </div>
@@ -123,7 +121,7 @@
 <div class="responsive">
   <div class="gallery">
     <a target="_blank" href="{{ post.gallery_image_1.url }}">
-      <img class="banner" src="{{ post.gallery_image_1.url }}">
+      <img  src="{{ post.gallery_image_1.url }}">
     </a>
   </div>
 </div>
@@ -131,7 +129,7 @@
 <div class="responsive">
   <div class="gallery">
     <a target="_blank" href="{{ post.gallery_image_2.url }}">
-      <img class="banner" src="{{ post.gallery_image_2.url }}">
+      <img src="{{ post.gallery_image_2.url }}">
     </a>
   </div>
 </div>
@@ -139,14 +137,15 @@
 <div class="responsive">
   <div class="gallery">
     <a target="_blank" href="{{ post.gallery_image_3.url }}">
-      <img class="banner" src="{{ post.gallery_image_3.url }}">
+      <img src="{{ post.gallery_image_3.url }}">
     </a>
   </div>
 </div>
 
+    <div class="container">
+    <div class="content-section">
+ {{ plot | safe }}
     </div>
-</div>
-<br>
-
+    </div>
 
 {% endblock content %}

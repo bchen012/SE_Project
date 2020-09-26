@@ -38,7 +38,23 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'django.contrib.humanize',
     'Home',
+    'django_plotly_dash.apps.DjangoPlotlyDashConfig',
+    # 'channels',
+    # 'channels_redis'
 ]
+
+# X_FRAME_OPTIONS = 'SAMEORIGIN'
+#
+# ASGI_APPLICATION = 'django_project.routing.application'
+#
+# CHANNEL_LAYERS = {
+#     "default": {
+#         "BACKEND": "channels_redis.core.RedisChannelLayer",
+#         "CONFIG": {
+#             "hosts": [('127.0.0.1', 6379), ],
+#         },
+#     },
+# }
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -114,6 +130,22 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
+
+# STATICFILES_FINDERS = [
+#     'django.contrib.staticfiles.finders.FileSystemFinder',
+#     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+#     'django_plotly_dash.finders.DashAssetFinder',
+#     'django_plotly_dash.finders.DashComponentFinder'
+# ]
+#
+# PLOTLY_COMPONENTS = [
+#     'dash_core_components',
+#     'dash_html_components',
+#     'dash_renderer',
+#     'dpd_components'
+#
+# ]
+
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
@@ -122,3 +154,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'static/media')
 LOGIN_REDIRECT_URL = 'main'
 
 AUTH_PROFILE_MODULE = 'users.Profile'
+
+CORS_ORIGIN_ALLOW_ALL = True
