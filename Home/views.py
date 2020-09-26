@@ -43,10 +43,10 @@ def getData(town):
     data = requests.get(
         "https://data.gov.sg/api/action/datastore_search?resource_id=42ff9cfe-abe5-4b54-beda-c88f9bb438ee&limit=99999")
     data = json.loads(data.text)
-
     # Data Cleaning
     df = pd.DataFrame(data['result']['records'])
-    df['storey_range'] = df.apply(lambda x: int(x['storey_range'][0:2]), axis=1)  # Simplify Story Range to the first 2 char only
+    df['storey_range'] = df.apply(lambda x: int(x['storey_range'][0:2]),
+                                  axis=1)  # Simplify Story Range to the first 2 char only
     df = df[df['flat_type'] != 'MULTI-GENERATION']
     df['flat_type'] = df['flat_type'].apply(lambda x: '6 ROOM' if x == 'EXECUTIVE' else x)
     df['flat_type'] = df['flat_type'].apply(lambda x: x[:1].strip())
@@ -61,16 +61,50 @@ def postView(request, id):
     profile = Profile.objects.get(user=request.user)
     favorited = False
     df = getData(post.town)
-    X = df[['floor_area_sqm']]  # here we have 2 variables for multiple regression. If you just want to use one variable for simple linear regression, then use X = df['Interest_Rate'] for example.Alternatively, you may add additional variables within the brackets
-    Y = df['resale_price']
+    # X = df[['floor_area_sqm']]  # here we have 2 variables for multiple regression. If you just want to use one variable for simple linear regression, then use X = df['Interest_Rate'] for example.Alternatively, you may add additional variables within the brackets
+    # Y = df['resale_price']
     # regr = linear_model.LinearRegression()
     # regr.fit(X, Y)
-    fig = px.scatter(df, x='floor_area_sqm', y='resale_price', trendline='ols', trendline_color_override='darkblue', template='simple_white', opacity=0.9)
-    plot_div = plot(fig, output_type='div', include_plotlyjs=False)
+
+    fig1 = px.scatter(df, x='floor_area_sqm', y='resale_price', trendline='ols',
+                      trendline_color_override='red', template='simple_white',
+                      opacity=0.9,
+                      labels={'floor_area_sqm': 'Floor Area (Square meters)', 'resale_price': 'Resale Price ($)'},
+                      title="Floor Area vs Price")
+
+    plot_div1 = plot(fig1, output_type='div', include_plotlyjs=False)
+
+    fig2 = px.scatter(df, x='flat_type', y='resale_price', trendline='ols',
+                      trendline_color_override='red', template='simple_white',
+                      opacity=0.9,
+                      labels={'flat_type': 'Flat Type', 'resale_price': 'Resale Price ($)'},
+                      title="Flat Type vs Price")
+
+    plot_div2 = plot(fig2, output_type='div', include_plotlyjs=False)
+
+    fig3 = px.scatter(df, x='remaining_lease', y='resale_price', trendline='ols',
+                      trendline_color_override='red', template='simple_white',
+                      opacity=0.9,
+                      labels={'remaining_lease': 'Remaining Lease (Years)', 'resale_price': 'Resale Price ($)'},
+                      title="Remaining Lease vs Price")
+
+    plot_div3 = plot(fig3, output_type='div', include_plotlyjs=False)
+
+    fig4 = px.scatter(df, x='storey_range', y='resale_price', trendline='ols',
+                      trendline_color_override='red', template='simple_white',
+                      opacity=0.9,
+                      labels={'storey_range': 'Floor Level', 'resale_price': 'Resale Price ($)'},
+                      title="Floor Level vs Price")
+
+    plot_div4 = plot(fig4, output_type='div', include_plotlyjs=False)
 
     if profile.favorites.filter(id=id).exists():
         favorited = True
-    return render(request, 'Home/post_info.html', {'post': post, 'favorited': favorited, 'plot': plot_div})
+    return render(request, 'Home/post_info.html',
+                  {'post': post, 'favorited': favorited, 'plot1': plot_div1, 'plot2': plot_div2, 'plot3': plot_div3,
+                   'plot4': plot_div4})
+
+
 # 'plot': plot_div
 
 
