@@ -14,7 +14,7 @@ from sklearn import linear_model
 
 class Main(LoginRequiredMixin, ListView):
     model = Post
-    paginate_by = 1
+    paginate_by = 5
     login_url = 'login'
     template_name = 'Home/main.html'
     ordering = ['-date_posted']

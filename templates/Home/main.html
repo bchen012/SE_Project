@@ -29,8 +29,40 @@
     <br>
     <div class="content-section">
 
-{% for post in posts %}
-        <div class="row">
+{#{% for post in posts %}#}
+{#        <div class="row">#}
+{#            <div class="col m11">#}
+{#              <div class="card">#}
+{#                <div class="card-image waves-effect waves-block waves-light">#}
+{#                    {% if post.display_image.url %}#}
+{#                        <a href={% url 'view_post'  post.id %}><img src="{{ post.display_image.url }}" ></a>#}
+{#                    {% endif %}#}
+{#                </div>#}
+{#                <div class="card-content">#}
+{#                    <span class="card-title activator grey-text text-darken-4">#}
+{#                        <img class="responsive-img circle" src="{{ post.user.profile.image.url }}" width="60" height="60">#}
+{#                    <b>{{ post.user }}</b>#}
+{#                    <br>#}
+{#                        <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>#}
+{#                        </span>#}
+{#                    <h5>${{ post.price|intcomma }}</h5>#}
+{#                    <span><i class="material-icons small">location_city</i> {{ post.town }} </span><br>#}
+{#                    <span><i class="material-icons small">view_compact</i> {{ post.flat_type }} </span> <br>#}
+{#                    <span><i class="material-icons small">access_time</i> {{ post.remaining_lease }} Years </span> <br>#}
+{##}
+{#                    <br>#}
+{#                    {% if post.description %}#}
+{#                    <span><i class="material-icons small">description</i>{{ post.description }}</span>#}
+{#                    {% endif %}#}
+{#                </div>#}
+{#              </div>#}
+{#            </div>#}
+{#          </div>#}
+{##}
+{#    {% endfor %}#}
+    <br>
+    {% for post in page_obj %}
+                <div class="row">
             <div class="col m11">
               <div class="card">
                 <div class="card-image waves-effect waves-block waves-light">
@@ -58,35 +90,35 @@
               </div>
             </div>
           </div>
-
     {% endfor %}
+
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <li class="waves-effect"><a href="?page={{ page_obj.previous_page_number }}"><i class="material-icons">chevron_left</i></a></li>
+            {% else %}
+                <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+            {% endif %}
+
+
+          {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+                <li class="active black"><a href="?page={{ num }}">{{ num }}</a></li>
+            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                <li class = "waves-effect"><a  href="?page={{ num }}">{{ num }}</a></li>
+            {% endif %}
+          {% endfor %}
+
+            {% if page_obj.has_next %}
+                <li class="waves-effect"><a href="?page={{ page_obj.next_page_number }}"><i class="material-icons">chevron_right</i></a></li>
+            {% else %}
+                <li class="disabled"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+            {% endif %}
+        </span>
+    </div>
+
+
     <br>
-        {% if posts.has_other_pages %}
-
-      {% if posts.has_previous %}
-        <a class = "btn btn-outline-info mb-4" href="?page=1">First</a>
-        <a class = "btn btn-outline-info mb-4" href="?page={{ posts.previous_page_number }}">Previous</a>
-      {% endif %}
-
-      {% for num in posts.paginator.page_range %}
-        {% if posts.number == num %}
-          <a class = "btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
-        {% elif num > posts.number|add:'-3' and num < posts.number|add:'3' %}
-          <a class = "btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
-        {% endif %}
-      {% endfor %}
-
-      {% if posts.has_next %}
-        <a class = "btn btn-outline-info mb-4" href="?page={{ posts.next_page_number }}">Next</a>
-        <a class = "btn btn-outline-info mb-4" href="?page={{ posts.paginator.num_pages }}">Last</a>
-      {% endif %}
-
-    {% endif %}
-
-
-    <br>
-  </clr-dg-pagination>
-</clr-dg-footer>
         </div>
 
     </div>
