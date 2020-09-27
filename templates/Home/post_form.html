@@ -1,8 +1,6 @@
 {% extends "base2.html"%}
+{% load humanize %}
 {%block content%}
-
-
-
     <div class="container">
         <div class="content-section">
 
@@ -11,23 +9,44 @@
     <form method="POST" enctype="multipart/form-data">
       {% csrf_token %}
 
- <form action="/action_page.php">
-  <label for="cars">Choose a car:</label>
-  <select id="cars" name="cars">
-    <option value="volvo">Volvo XC90</option>
-    <option value="saab">Saab 95</option>
-    <option value="mercedes">Mercedes SLK</option>
-    <option value="audi">Audi TT</option>
-  </select>
-  <br><br>
-  <input type="submit" value="Submit">
-</form>
 
 <div class="fieldWrapper">
     <span><h5><i class="material-icons small">location_city</i> Town:  </h5>  </span>
-    {{ form.town }}
+
+
 </div>
+<div class="input-field">
+    <select class="browser-default" name="town" id="id_town">
+      <option value="ANG MO KIO">ANG MO KIO</option>
+      <option value="BEDOK" selected="">BEDOK</option>
+      <option value="BISHAN">BISHAN</option>
+      <option value="BUKIT MERAH">BUKIT MERAH</option>
+      <option value="BUKIT BATOK">BUKIT BATOK</option>
+      <option value="CENTRAL AREA">CENTRAL AREA</option>
+      <option value="BUKIT PANJANG">BUKIT PANJANG</option>
+      <option value="GEYLANG">GEYLANG</option>
+      <option value="BUKIT TIMAH">BUKIT TIMAH</option>
+      <option value="CHOA CHU KANG">CHOA CHU KANG</option>
+      <option value="CLEMENTI">CLEMENTI</option>
+      <option value="HOUGANG">HOUGANG</option>
+      <option value="QUEENSTOWN">QUEENSTOWN</option>
+      <option value="JURONG EAST">JURONG EAST</option>
+      <option value="JURONG WEST">JURONG WEST</option>
+      <option value="KALLANG">KALLANG</option>
+      <option value="MARINE PARADE">MARINE PARADE</option>
+      <option value="PASIR RIS">PASIR RIS</option>
+      <option value="PUNGGOL">PUNGGOL</option>
+      <option value="SEMBAWANG">SEMBAWANG</option>
+      <option value="SENGKANG">SENGKANG</option>
+      <option value="SERANGOON">SERANGOON</option>
+      <option value="TAMPINES">TAMPINES</option>
+      <option value="TOA PAYOH">TOA PAYOH</option>
+      <option value="WOODLANDS">WOODLANDS</option>
+      <option value="YISHUN">YISHUN</option>
+</select>
+    </div>
         <br>
+
 
         <div class="fieldWrapper">
     <span><h5><i class="material-icons small">location_on</i> Postal Code:  </h5>  </span>
@@ -40,10 +59,9 @@
 
 <div class="fieldWrapper">
     <span><h5><i class="material-icons small">location_on</i> Address:  </h5>  </span>
-    <input id="address" type="text" name="address" value="{{ address }}">
+    <input id="address" type="text" name="address" value="{{ address }}" required="" id="id_address" >
 </div>
 <br>
-
 
 
 
@@ -54,7 +72,14 @@
         <br>
 <div class="fieldWrapper">
     <span><h5><i class="material-icons small">view_compact</i> Flat Type:  </h5>  </span>
-    {{ form.flat_type }}
+    <select class="browser-default" name="flat_type" id="id_flat_type">
+      <option value="Studio Apartment">Studio Apartment</option>
+      <option value="2-Room Flat" selected="">2-Room Flat</option>
+      <option value="3-Room Flat">3-Room Flat</option>
+      <option value="4-Room Flat">4-Room Flat</option>
+      <option value="5-Room Flat">5-Room Flat</option>
+      <option value="Executive Flat">Executive Flat</option>
+    </select>
 </div>
 <br>
         <div class="fieldWrapper">
@@ -77,8 +102,9 @@
 <br>
 <br>
         <div class="fieldWrapper">
-        <span><h5> Recommended Price: $ {{ recommendedPrice }} </h5>  </span>
-
+        <span><h5> Recommended Price: $ {{ recommendedPrice|intcomma }} </h5>  </span>
+        <input type="hidden" name="recommended_price" value={{ recommendedPrice }} required="" id="id_recommended_price">
+{#        {{ form.recommended_price }}#}
         </div>
 <br>
         <div class="fieldWrapper">

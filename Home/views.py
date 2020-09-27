@@ -31,23 +31,22 @@ class Main(LoginRequiredMixin, ListView):
 
 def createPost(request):
     address = ' '
-    recommendedPrice = ' '
+    recommendedPrice = 0
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
-        if 'postalCode' in request.POST:
+        town = form['town'].value()
+        flat_type = form['flat_type'].value()
+        floor_area = form['floor_area'].value()
+        remaining_lease = form['remaining_lease'].value()
+        recommendedPrice = getRecommendedPrice(town, flat_type, floor_area, remaining_lease)
+        if 'postalCode' in request.POST or 'predictPrice' in request.POST:
             address = getAddress(form['postal_code'].value())
-
-        if 'predictPrice' in request.POST:
-            town = form['town'].value()
-            flat_type = form['flat_type'].value()
-            floor_area = form['floor_area'].value()
-            remaining_lease = form['remaining_lease'].value()
-            recommendedPrice = getRecommendedPrice(town, flat_type, floor_area, remaining_lease)
-
         if 'done' in request.POST:
+            print(form.errors)
             if form.is_valid():
                 form.cleaned_data['address'] = address
                 instance = form.save(commit=False)
+                print(form)
                 instance.user = request.user
                 instance.save()
 
@@ -58,6 +57,10 @@ def createPost(request):
 
 
 def getRecommendedPrice(town, flat_type, floor_area, remaining_lease):
+    if flat_type == 'Executive Flat':
+        flat_type = '6'
+    if flat_type == 'Studio Apartment':
+        flat_type = '1'
     with open('static/LearningModel/FlatType') as file:
         X1 = json.loads(file.read())
     with open('static/LearningModel/FloorArea') as file:
@@ -66,7 +69,7 @@ def getRecommendedPrice(town, flat_type, floor_area, remaining_lease):
         X3 = json.loads(file.read())
     with open('static/LearningModel/Intercept') as file:
         intercept = json.loads(file.read())
-    price = round(X1[town] * int(flat_type[0]) + X2[town] * int(floor_area) + X3[town] * int(remaining_lease) + intercept[town], 2)
+    price = round(X1[town] * int(flat_type[0]) + X2[town] * int(floor_area) + X3[town] * int(remaining_lease) + intercept[town], 0)
     if price < 0:
         price = 0
     return price
@@ -82,20 +85,6 @@ def getAddress(postalCode):
         return ''
     addr = str(data['results'][0]['BLK_NO'])+" "+str(data['results'][0]['ROAD_NAME']+" SINGAPORE "+str(postalCode))
     return addr
-
-
-# class PostCreateView(LoginRequiredMixin, CreateView):
-#     model = Post
-#     fields = ['town', 'address', 'floor_number', 'flat_type', 'floor_area', 'remaining_lease', 'price', 'description',
-#               'display_image', 'gallery_image_0', 'gallery_image_1', 'gallery_image_2', 'gallery_image_3']
-#
-#     def form_valid(self, form):
-#
-#         form.instance.user = self.request.user
-#         return super().form_valid(form)
-#
-#     def get_success_url(self):
-#         return reverse('main')
 
 
 def updateData(request):
@@ -168,8 +157,12 @@ def postView(request, id):
     post = get_object_or_404(Post, id=id)
     profile = Profile.objects.get(user=request.user)
     favorited = False
-
-    df = getData(post.town, int(post.flat_type[0]))
+    flat_type = post.flat_type
+    if flat_type == 'Executive Flat':
+        flat_type = '6'
+    if flat_type == 'Studio Apartment':
+        flat_type = '1'
+    df = getData(post.town, int(flat_type[0]))
 
     fig1 = px.scatter(df, x='floor_area_sqm', y='resale_price', template='simple_white',
                       opacity=1,
