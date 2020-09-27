@@ -16,8 +16,8 @@
 </head>
 {% if user.is_superuser %}
   <nav>
-    <div class="nav-wrapper black">
-      <a href="{% url 'main' %}" class="brand-logo">Admin Menu</a>
+    <div class="nav-wrapper grey darken-2">
+      <a href="{% url 'main' %}"  class="brand-logo"><i class="material-icons">menu</i></a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li><a href="{% url 'updateData'%}">Update Data</a></li>
       </ul>
@@ -29,37 +29,6 @@
     <br>
     <div class="content-section">
 
-{#{% for post in posts %}#}
-{#        <div class="row">#}
-{#            <div class="col m11">#}
-{#              <div class="card">#}
-{#                <div class="card-image waves-effect waves-block waves-light">#}
-{#                    {% if post.display_image.url %}#}
-{#                        <a href={% url 'view_post'  post.id %}><img src="{{ post.display_image.url }}" ></a>#}
-{#                    {% endif %}#}
-{#                </div>#}
-{#                <div class="card-content">#}
-{#                    <span class="card-title activator grey-text text-darken-4">#}
-{#                        <img class="responsive-img circle" src="{{ post.user.profile.image.url }}" width="60" height="60">#}
-{#                    <b>{{ post.user }}</b>#}
-{#                    <br>#}
-{#                        <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>#}
-{#                        </span>#}
-{#                    <h5>${{ post.price|intcomma }}</h5>#}
-{#                    <span><i class="material-icons small">location_city</i> {{ post.town }} </span><br>#}
-{#                    <span><i class="material-icons small">view_compact</i> {{ post.flat_type }} </span> <br>#}
-{#                    <span><i class="material-icons small">access_time</i> {{ post.remaining_lease }} Years </span> <br>#}
-{##}
-{#                    <br>#}
-{#                    {% if post.description %}#}
-{#                    <span><i class="material-icons small">description</i>{{ post.description }}</span>#}
-{#                    {% endif %}#}
-{#                </div>#}
-{#              </div>#}
-{#            </div>#}
-{#          </div>#}
-{##}
-{#    {% endfor %}#}
     <br>
     {% for post in page_obj %}
                 <div class="row">

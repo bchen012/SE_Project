@@ -28,7 +28,7 @@ urlpatterns = [
     path('register/', user_views.register, name='register'),
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
     path('main/', home_views.Main.as_view(), name='main'),
-    path('post/new/', home_views.PostCreateView.as_view(), name='post-create'),
+    path('post/new/', home_views.createPost, name='post-create'),
     path('profile/', user_views.profile, name='profile'),
     path('view_post/<int:id>', home_views.postView, name='view_post'),
     path('favorite/<int:id>', home_views.favoritePost, name='favorite'),

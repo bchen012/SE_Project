@@ -6,8 +6,7 @@
   <style>
       .material-icons{
         display: inline-flex;
-        vertical-align: top;
-    }
+        vertical-align: top;}
     .banner
     {
         width: 100%;
@@ -46,16 +45,21 @@
             <h3>{{ user.username }}</h3>
         </div>
     <div class="container">
+
+    <h4>User Details</h4>
           <div class="card">
             <div class="card-content">
-                <span class="card-title activator grey-text text-darken-4" style="font-weight: bold;">User Details<i class="material-icons right">edit</i></span>
+                <span class="card-title activator"><i class="material-icons right">edit</i></span>
+                <br>
+                <span><i class="material-icons left small">person</i> {{ user.first_name }} {{ user.last_name }}</span>
                 <br>
                 <br>
-                <h6> Name: {{ user.first_name }} {{ user.last_name }}</h6>
+                <span><i class="material-icons left small">contact_mail</i> {{ user.email }}</span>
                 <br>
-                <h6> Email: {{ user.email }}</h6>
                 <br>
-                <h6> Contact Number: {{ user.profile.contactNumber }}</h6>
+                <span><i class="material-icons left small">contact_phone</i> {{ user.profile.contactNumber }}</span>
+                <br>
+                <br>
             </div>
             <div class="card-reveal">
                 <span class="card-title grey-text text-darken-4">Edit Profile<i class="material-icons right">close</i></span>
@@ -68,7 +72,8 @@
             </div>
           </div>
 
-
+        <h4>Favorites</h4>
+        <br>
         {% for post in profile.favorites.all %}
               <div class="card">
                 <div class="card-image waves-effect waves-block waves-light">

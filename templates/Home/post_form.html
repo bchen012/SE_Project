@@ -1,14 +1,118 @@
 {% extends "base2.html"%}
 {%block content%}
 
+
+
     <div class="container">
         <div class="content-section">
-            <h5>Please fill in the details below</h5>
+
+            <h4>Please fill in the details below</h4>
+        <br>
     <form method="POST" enctype="multipart/form-data">
       {% csrf_token %}
-          {{ form.as_p }}
 
-        <button class ="btn btn-outline-info" type="submit">Submit</button>
+ <form action="/action_page.php">
+  <label for="cars">Choose a car:</label>
+  <select id="cars" name="cars">
+    <option value="volvo">Volvo XC90</option>
+    <option value="saab">Saab 95</option>
+    <option value="mercedes">Mercedes SLK</option>
+    <option value="audi">Audi TT</option>
+  </select>
+  <br><br>
+  <input type="submit" value="Submit">
+</form>
+
+<div class="fieldWrapper">
+    <span><h5><i class="material-icons small">location_city</i> Town:  </h5>  </span>
+    {{ form.town }}
+</div>
+        <br>
+
+        <div class="fieldWrapper">
+    <span><h5><i class="material-icons small">location_on</i> Postal Code:  </h5>  </span>
+    {{ form.postal_code }}
+</div>
+<br>
+          <button class ="btn btn-outline-info" name="postalCode" type="submit">Get Address</button>
+        <br>
+        <br>
+
+<div class="fieldWrapper">
+    <span><h5><i class="material-icons small">location_on</i> Address:  </h5>  </span>
+    <input id="address" type="text" name="address" value="{{ address }}">
+</div>
+<br>
+
+
+
+
+<div class="fieldWrapper">
+    <span><h5><i class="material-icons small">swap_vert</i> Floor Level:  </h5>  </span>
+    {{ form.floor_number }}
+</div>
+        <br>
+<div class="fieldWrapper">
+    <span><h5><i class="material-icons small">view_compact</i> Flat Type:  </h5>  </span>
+    {{ form.flat_type }}
+</div>
+<br>
+        <div class="fieldWrapper">
+        <span><h5><i class="material-icons small">straighten</i> Floor Area (square meters): </h5>  </span>
+        {{ form.floor_area }}
+        </div>
+<br>
+        <div class="fieldWrapper">
+        <span><h5><i class="material-icons small">access_time</i> Remaining Lease (years):  </h5>  </span>
+        {{ form.remaining_lease }}
+        </div>
+<br>
+          <button class ="btn btn-outline-info" name="predictPrice" type="submit">Get Recommended Price</button>
+        <br>
+        <br>
+        <div class="fieldWrapper">
+        <span><h5><i class="material-icons small">attach_money</i> Price:  </h5>  </span>
+        {{ form.price }}
+        </div>
+<br>
+<br>
+        <div class="fieldWrapper">
+        <span><h5> Recommended Price: $ {{ recommendedPrice }} </h5>  </span>
+
+        </div>
+<br>
+        <div class="fieldWrapper">
+        <span><h5><i class="material-icons small">description</i> Description:  </h5>  </span>
+        {{ form.description }}
+        </div>
+<br>
+        <div class="fieldWrapper">
+        <span><h5><i class="material-icons small">image</i> Display Image:  </h5>  </span>
+        {{ form.display_image }}
+        </div>
+<br>
+        <div class="fieldWrapper">
+        <span><h5><i class="material-icons small">image</i> Gallery Image 1:  </h5>  </span>
+        {{ form.gallery_image_0 }}
+        </div>
+<br>
+                <div class="fieldWrapper">
+        <span><h5><i class="material-icons small">image</i> Gallery Image 2:  </h5>  </span>
+        {{ form.gallery_image_1 }}
+        </div>
+<br>
+                <div class="fieldWrapper">
+        <span><h5><i class="material-icons small">image</i> Gallery Image 3:  </h5>  </span>
+        {{ form.gallery_image_2 }}
+        </div>
+<br>
+                <div class="fieldWrapper">
+        <span><h5><i class="material-icons small">image</i> Gallery Image 4:  </h5>  </span>
+        {{ form.gallery_image_3 }}
+        </div>
+<br>
+
+        <button class ="btn btn-outline-info" name="done" type="submit">Submit</button>
     </form>
   </div>
 </div>

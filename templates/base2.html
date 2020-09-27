@@ -2,12 +2,49 @@
 
 <html>
     <head>
+
     <title>{% block title %}HOMEBASE{% endblock %}</title>
         <style>
         .center-fit {
             width: 2000px;
             height: auto;
         }
+        .material-icons{
+        display: inline-flex;
+        vertical-align: top;
+        }
+        .banner
+        {
+            width: 100%;
+          z-index: -1;
+        }
+
+        div.gallery {
+          margin: 5px;
+          border: 1px solid #ccc;
+
+          width: 100%;
+        }
+
+        div.gallery:hover {
+          border: 1px solid #777;
+        }
+
+        div.gallery img {
+          width: 100%;
+          height: auto;
+        }
+
+
+
+        .responsive {
+          padding: 0 6px;
+          margin-left: auto;
+          margin-right: auto;
+          margin-top: 30px;
+          width: 60%;
+        }
+
     </style>
 
 
@@ -32,9 +69,6 @@
         <li><a style="color: black" href="{% url 'main' %}">Home</a></li>
         <li><a style="color: black" href="{% url 'post-create' %}">Post</a></li>
           <li><a style="color: black" href="{% url 'profile'%}">Profile</a></li>
-
-
-
 
         <li><a style="color: black" href="{% url 'logout' %}">Logout</a></li>
       </ul>
