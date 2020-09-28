@@ -72,7 +72,7 @@
 
           {% for num in page_obj.paginator.page_range %}
             {% if page_obj.number == num %}
-                <li class="active black"><a href="?page={{ num }}">{{ num }}</a></li>
+                <li class="active teal lighten-2"><a href="?page={{ num }}">{{ num }}</a></li>
             {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
                 <li class = "waves-effect"><a  href="?page={{ num }}">{{ num }}</a></li>
             {% endif %}

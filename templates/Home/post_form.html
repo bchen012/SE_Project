@@ -17,32 +17,32 @@
 </div>
 <div class="input-field">
     <select class="browser-default" name="town" id="id_town">
-      <option value="ANG MO KIO">ANG MO KIO</option>
-      <option value="BEDOK" selected="">BEDOK</option>
-      <option value="BISHAN">BISHAN</option>
-      <option value="BUKIT MERAH">BUKIT MERAH</option>
-      <option value="BUKIT BATOK">BUKIT BATOK</option>
-      <option value="CENTRAL AREA">CENTRAL AREA</option>
-      <option value="BUKIT PANJANG">BUKIT PANJANG</option>
-      <option value="GEYLANG">GEYLANG</option>
-      <option value="BUKIT TIMAH">BUKIT TIMAH</option>
-      <option value="CHOA CHU KANG">CHOA CHU KANG</option>
-      <option value="CLEMENTI">CLEMENTI</option>
-      <option value="HOUGANG">HOUGANG</option>
-      <option value="QUEENSTOWN">QUEENSTOWN</option>
-      <option value="JURONG EAST">JURONG EAST</option>
-      <option value="JURONG WEST">JURONG WEST</option>
-      <option value="KALLANG">KALLANG</option>
-      <option value="MARINE PARADE">MARINE PARADE</option>
-      <option value="PASIR RIS">PASIR RIS</option>
-      <option value="PUNGGOL">PUNGGOL</option>
-      <option value="SEMBAWANG">SEMBAWANG</option>
-      <option value="SENGKANG">SENGKANG</option>
-      <option value="SERANGOON">SERANGOON</option>
-      <option value="TAMPINES">TAMPINES</option>
-      <option value="TOA PAYOH">TOA PAYOH</option>
-      <option value="WOODLANDS">WOODLANDS</option>
-      <option value="YISHUN">YISHUN</option>
+      <option value="ANG MO KIO" {% if selectedTown ==  'ANG MO KIO'%} selected {% endif %}>ANG MO KIO</option>
+      <option value="BEDOK" {% if selectedTown ==  'BEDOK'%} selected {% endif %} >BEDOK</option>
+      <option value="BISHAN" {% if selectedTown ==  'BISHAN'%} selected {% endif %}>BISHAN</option>
+      <option value="BUKIT MERAH" {% if selectedTown ==  'BUKIT MERAH'%} selected {% endif %}>BUKIT MERAH</option>
+      <option value="BUKIT BATOK" {% if selectedTown ==  'BUKIT BATOK'%} selected {% endif %}>BUKIT BATOK</option>
+      <option value="CENTRAL AREA" {% if selectedTown ==  'CENTRAL AREA'%} selected {% endif %}>CENTRAL AREA</option>
+      <option value="BUKIT PANJANG" {% if selectedTown ==  'BUKIT PANJANG'%} selected {% endif %} >BUKIT PANJANG</option>
+      <option value="GEYLANG" {% if selectedTown ==  'GEYLANG'%} selected {% endif %}>GEYLANG</option>
+      <option value="BUKIT TIMAH"  {% if selectedTown ==  'BUKIT TIMAH'%} selected {% endif %}>BUKIT TIMAH</option>
+      <option value="CHOA CHU KANG"  {% if selectedTown ==  'CHOA CHU KANG'%} selected {% endif %}>CHOA CHU KANG</option>
+      <option value="CLEMENTI"  {% if selectedTown ==  'CLEMENTI'%} selected {% endif %}>CLEMENTI</option>
+      <option value="HOUGANG"  {% if selectedTown ==  'HOUGANG'%} selected {% endif %}>HOUGANG</option>
+      <option value="QUEENSTOWN"  {% if selectedTown ==  'QUEENSTOWN'%} selected {% endif %}>QUEENSTOWN</option>
+      <option value="JURONG EAST"  {% if selectedTown ==  'JURONG EAST'%} selected {% endif %}>JURONG EAST</option>
+      <option value="JURONG WEST"  {% if selectedTown ==  'JURONG WEST'%} selected {% endif %}>JURONG WEST</option>
+      <option value="KALLANG"  {% if selectedTown ==  'KALLANG'%} selected {% endif %}>KALLANG</option>
+      <option value="MARINE PARADE"  {% if selectedTown ==  'MARINE PARADE'%} selected {% endif %}>MARINE PARADE</option>
+      <option value="PASIR RIS"  {% if selectedTown ==  'PASIR RIS'%} selected {% endif %}>PASIR RIS</option>
+      <option value="PUNGGOL"  {% if selectedTown ==  'PUNGGOL'%} selected {% endif %}>PUNGGOL</option>
+      <option value="SEMBAWANG"  {% if selectedTown ==  'SEMBAWANG'%} selected {% endif %}>SEMBAWANG</option>
+      <option value="SENGKANG"  {% if selectedTown ==  'SENGKANG'%} selected {% endif %}>SENGKANG</option>
+      <option value="SERANGOON"  {% if selectedTown ==  'SERANGOON'%} selected {% endif %}>SERANGOON</option>
+      <option value="TAMPINES"  {% if selectedTown ==  'TAMPINES'%} selected {% endif %}>TAMPINES</option>
+      <option value="TOA PAYOH"  {% if selectedTown ==  'TOA PAYOH'%} selected {% endif %}>TOA PAYOH</option>
+      <option value="WOODLANDS"  {% if selectedTown ==  'WOODLANDS'%} selected {% endif %}>WOODLANDS</option>
+      <option value="YISHUN"  {% if selectedTown ==  'YISHUN'%} selected {% endif %}>YISHUN</option>
 </select>
     </div>
         <br>
@@ -73,12 +73,12 @@
 <div class="fieldWrapper">
     <span><h5><i class="material-icons small">view_compact</i> Flat Type:  </h5>  </span>
     <select class="browser-default" name="flat_type" id="id_flat_type">
-      <option value="Studio Apartment">Studio Apartment</option>
-      <option value="2-Room Flat" selected="">2-Room Flat</option>
-      <option value="3-Room Flat">3-Room Flat</option>
-      <option value="4-Room Flat">4-Room Flat</option>
-      <option value="5-Room Flat">5-Room Flat</option>
-      <option value="Executive Flat">Executive Flat</option>
+      <option value="Studio Apartment" {% if selectedFlatType == 'Studio Apartment' %} selected {% endif %}>Studio Apartment</option>
+      <option value="2-Room Flat" {% if selectedFlatType == '2-Room Flat' %} selected {% endif %}>2-Room Flat</option>
+      <option value="3-Room Flat" {% if selectedFlatType == '3-Room Flat' %} selected {% endif %}>3-Room Flat</option>
+      <option value="4-Room Flat" {% if selectedFlatType == '4-Room Flat' %} selected {% endif %}>4-Room Flat</option>
+      <option value="5-Room Flat" {% if selectedFlatType == '5-Room Flat' %} selected {% endif %}>5-Room Flat</option>
+      <option value="Executive Flat" {% if selectedFlatType == 'Executive Flat' %} selected {% endif %}>Executive Flat</option>
     </select>
 </div>
 <br>
@@ -104,7 +104,6 @@
         <div class="fieldWrapper">
         <span><h5> Recommended Price: $ {{ recommendedPrice|intcomma }} </h5>  </span>
         <input type="hidden" name="recommended_price" value={{ recommendedPrice }} required="" id="id_recommended_price">
-{#        {{ form.recommended_price }}#}
         </div>
 <br>
         <div class="fieldWrapper">

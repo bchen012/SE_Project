@@ -32,6 +32,8 @@ class Main(LoginRequiredMixin, ListView):
 def createPost(request):
     address = ' '
     recommendedPrice = 0
+    town = 'ANG MO KIO'
+    flat_type = '2-Room Flat'
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
         town = form['town'].value()
@@ -53,7 +55,8 @@ def createPost(request):
                 return redirect('main')
     else:
         form = PostForm()
-    return render(request, 'Home/post_form.html', {'form': form, 'address': address, 'recommendedPrice': recommendedPrice})
+    return render(request, 'Home/post_form.html', {'form': form, 'address': address, 'selectedFlatType': flat_type,
+                                                   'recommendedPrice': recommendedPrice, 'selectedTown': town})
 
 
 def getRecommendedPrice(town, flat_type, floor_area, remaining_lease):
@@ -194,10 +197,39 @@ def postView(request, id):
 def favoritePost(request, id):
     post = get_object_or_404(Post, id=id)
     profile = Profile.objects.get(user=request.user)
+    flat_type = post.flat_type
+    if flat_type == 'Executive Flat':
+        flat_type = '6'
+    if flat_type == 'Studio Apartment':
+        flat_type = '1'
+    df = getData(post.town, int(flat_type[0]))
+
+    fig1 = px.scatter(df, x='floor_area_sqm', y='resale_price', template='simple_white',
+                      opacity=1,
+                      labels={'floor_area_sqm': 'Floor Area (Square meters)', 'resale_price': 'Resale Price ($)'},
+                      title="Floor Area vs Price")
+
+    plot_div1 = plot(fig1, output_type='div', include_plotlyjs=False)
+
+    fig3 = px.scatter(df, x='remaining_lease', y='resale_price', template='simple_white',
+                      opacity=1,
+                      labels={'remaining_lease': 'Remaining Lease (Years)', 'resale_price': 'Resale Price ($)'},
+                      title="Remaining Lease vs Price")
+
+    plot_div3 = plot(fig3, output_type='div', include_plotlyjs=False)
+
+    fig4 = px.scatter(df, x='storey_range', y='resale_price', template='simple_white',
+                      opacity=1,
+                      labels={'storey_range': 'Floor Level', 'resale_price': 'Resale Price ($)'},
+                      title="Floor Level vs Price")
+
+    plot_div4 = plot(fig4, output_type='div', include_plotlyjs=False)
+
     favorited = False
     if profile.favorites.filter(id=id).exists():
         profile.favorites.remove(post)
     else:
         profile.favorites.add(post)
         favorited = True
-    return render(request, 'Home/post_info.html', {'post': post, 'favorited': favorited})
+    return render(request, 'Home/post_info.html', {'post': post, 'favorited': favorited,  'plot1': plot_div1,
+                                                   'plot3': plot_div3, 'plot4': plot_div4})
