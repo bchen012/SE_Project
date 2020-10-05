@@ -27,8 +27,9 @@
     <div class="main">
     <div class="container">
     <br>
+    <i class="material-icons medium">search</i>
+    <br>
     <div class="content-section">
-
     <br>
     {% for post in page_obj %}
                 <div class="row">
@@ -72,7 +73,7 @@
 
           {% for num in page_obj.paginator.page_range %}
             {% if page_obj.number == num %}
-                <li class="active teal lighten-2"><a href="?page={{ num }}">{{ num }}</a></li>
+                <li class="active blue darken-4"><a href="?page={{ num }}">{{ num }}</a></li>
             {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
                 <li class = "waves-effect"><a  href="?page={{ num }}">{{ num }}</a></li>
             {% endif %}

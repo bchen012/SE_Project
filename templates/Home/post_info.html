@@ -1,5 +1,6 @@
 {% extends "base2.html"%}
 {% load humanize %}
+{% load static %}
 {%block content%}
 <head>
   <style>
@@ -60,6 +61,7 @@
             <span><i class="material-icons small">view_compact</i> {{ post.flat_type }} </span> <br>
             <span><i class="material-icons small">straighten</i> {{ post.floor_area }} Square Meters </span> <br>
             <span><i class="material-icons small">access_time</i> {{ post.remaining_lease }} Years </span> <br>
+            <span> <img src={% static 'media/calc.png' %} width = "30" class="material-icons small"> Recommended Price ${{ post.recommended_price|intcomma }} </span> <br>
 
             <br>
             {% if post.description %}
@@ -69,7 +71,7 @@
         <br>
         <br>
 
-        <a class="waves-effect waves-light btn" href={% url 'favorite' post.id %}><i class="material-icons right">
+        <a class="waves-effect waves-light btn blue darken-4" href={% url 'favorite' post.id %}><i class="material-icons right">
             {% if favorited %}
                 favorite
             {% else %}

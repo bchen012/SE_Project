@@ -34,6 +34,8 @@ urlpatterns = [
     path('favorite/<int:id>', home_views.favoritePost, name='favorite'),
     path('unfavorite/<int:id>', user_views.unfavorite, name='unfavorite'),
     path('updateStats/', home_views.updateData, name='updateData'),
+    path('post/<int:id>/update', home_views.updatePost, name='post-update'),
+    path('post/<int:pk>/delete', home_views.PostDeleteView.as_view(), name='post-delete'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -50,10 +50,14 @@
 
         <div class="fieldWrapper">
     <span><h5><i class="material-icons small">location_on</i> Postal Code:  </h5>  </span>
-    {{ form.postal_code }}
+    {% if post %}
+        <input type="number" name="postal_code" value={{ post.postal_code }} required="" id="id_postal_code">
+    {% else %}
+        {{ form.postal_code }}
+    {% endif %}
 </div>
 <br>
-          <button class ="btn btn-outline-info" name="postalCode" type="submit">Get Address</button>
+          <button class ="btn btn-outline-info blue darken-4" name="postalCode" type="submit">Get Address</button>
         <br>
         <br>
 
@@ -92,7 +96,7 @@
         {{ form.remaining_lease }}
         </div>
 <br>
-          <button class ="btn btn-outline-info" name="predictPrice" type="submit">Get Recommended Price</button>
+          <button class ="btn btn-outline-info blue darken-4" name="predictPrice" type="submit">Get Recommended Price</button>
         <br>
         <br>
         <div class="fieldWrapper">
@@ -137,7 +141,7 @@
         </div>
 <br>
 
-        <button class ="btn btn-outline-info" name="done" type="submit">Submit</button>
+        <button class ="btn btn-outline-info blue darken-4" name="done" type="submit">Submit</button>
     </form>
   </div>
 </div>

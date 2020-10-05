@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Post
 from users.models import Profile
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import reverse
 from plotly.offline import plot
 import plotly.express as px
@@ -48,7 +48,6 @@ def createPost(request):
             if form.is_valid():
                 form.cleaned_data['address'] = address
                 instance = form.save(commit=False)
-                print(form)
                 instance.user = request.user
                 instance.save()
 
@@ -57,6 +56,44 @@ def createPost(request):
         form = PostForm()
     return render(request, 'Home/post_form.html', {'form': form, 'address': address, 'selectedFlatType': flat_type,
                                                    'recommendedPrice': recommendedPrice, 'selectedTown': town})
+
+
+def updatePost(request, id):
+    post = get_object_or_404(Post, id=id)
+    address = post.address
+    recommendedPrice = post.recommended_price
+    town = post.town
+    flat_type = post.flat_type
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES, instance=post)
+        town = form['town'].value()
+        flat_type = form['flat_type'].value()
+        floor_area = form['floor_area'].value()
+        remaining_lease = form['remaining_lease'].value()
+        recommendedPrice = getRecommendedPrice(town, flat_type, floor_area, remaining_lease)
+        if 'postalCode' in request.POST or 'predictPrice' in request.POST:
+            address = getAddress(form['postal_code'].value())
+        if 'done' in request.POST:
+            print(form.errors)
+            if form.is_valid():
+                form.cleaned_data['address'] = address
+                form.save()
+                return redirect('profile')
+    else:
+        form = PostForm(instance=post)
+    return render(request, 'Home/post_form.html', {'form': form, 'post': post, 'address': address, 'selectedFlatType': flat_type,
+                                                   'recommendedPrice': recommendedPrice, 'selectedTown': town})
+
+
+class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Post
+    success_url = '/profile'
+
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.user:
+            return True
+        return False
 
 
 def getRecommendedPrice(town, flat_type, floor_area, remaining_lease):

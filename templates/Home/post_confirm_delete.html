@@ -1,0 +1,17 @@
+{% extends "base2.html" %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+  <div class="content">
+        <div class="container">
+    <form method="POST">
+      {% csrf_token %}
+        <h3>Are you sure you want to delete this listing?</h3>
+      <div class="form-group">
+        <button class="btn btn-outline blue darken-4" type="submit">Delete</button>
+        <a class ="btn btn-outline blue darken-4" href="{% url 'profile' %}">Cancel</a>
+      </div>
+    </form>
+  </div>
+  </div>
+{% endblock %}
