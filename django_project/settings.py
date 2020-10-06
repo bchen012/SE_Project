@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'django.contrib.humanize',
     'Home',
+    'Message',
+    'django_messages',
     'django_plotly_dash.apps.DjangoPlotlyDashConfig',
     # 'channels',
     # 'channels_redis'
@@ -65,6 +67,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+DJANGO_MESSAGES_NOTIFY = False
 
 ROOT_URLCONF = 'django_project.urls'
 

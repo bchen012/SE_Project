@@ -15,6 +15,7 @@ class Profile(models.Model):
     image = models.ImageField(default='default.jpg', upload_to='profile_pics')
     contactNumber = models.CharField(default="", max_length=8)
     favorites = models.ManyToManyField(Post)
+
     def __str__(self):
         return '%s %s' % (self.user.username, '\'s Profile')
 

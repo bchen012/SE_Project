@@ -21,9 +21,12 @@ from django.urls import path, include
 from users import views as user_views
 from django.contrib.auth import views as auth_views
 from Home import views as home_views
+from Message import views as message_views
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    path(r'^messages/', include('django_messages.urls')),
     path('', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
     path('register/', user_views.register, name='register'),
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
@@ -36,6 +39,7 @@ urlpatterns = [
     path('updateStats/', home_views.updateData, name='updateData'),
     path('post/<int:id>/update', home_views.updatePost, name='post-update'),
     path('post/<int:pk>/delete', home_views.PostDeleteView.as_view(), name='post-delete'),
+    path('message/', message_views.getMessages, name='message')
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

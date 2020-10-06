@@ -1,0 +1,13 @@
+{% extends "base2.html" %}
+{% block content %}
+
+    <h4>Sent</h4>
+    {% for messages in sent %}
+    {{ messages }}
+    {% endfor %}
+
+    <h4>Received</h4>
+    {% for messages in received %}
+    {{ messages }}
+    {% endfor %}
+{% endblock %}
