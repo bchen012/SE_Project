@@ -69,26 +69,21 @@
         <li><a style="color: black" href="{% url 'main' %}">Home</a></li>
         <li><a style="color: black" href="{% url 'post-create' %}">Post</a></li>
           <li><a style="color: black" href="{% url 'profile'%}">Profile</a></li>
-
         <li><a style="color: black" href="{% url 'logout' %}">Logout</a></li>
+          <li><a style="color: black" href="{% url 'pinax_messages:inbox' %}"><i class="material-icons small"> inbox </i></a></li>
+
       </ul>
     </div>
   </nav>
 </div>
+{#<a href="{% url 'pinax_messages:inbox' %}"><i class="material-icons medium"> inbox </i> </a>#}
+{#<a href="{% url 'pinax_messages:thread_detail' thread.pk %}"><i class="fa fa-envelope"></i> {% trans "View Message Thread" %}</a>#}
 
 {% block content %}
 
 {% endblock content%}
-
-{% block sidebar %}
-<ul class="subnavilist">
-    <li><a href="{% url 'messages_inbox' %} ">&raquo;&nbsp;{% trans "Inbox" %}</a></li>
-    <li><a href="{% url 'messages_outbox' %} ">&raquo;&nbsp;{% trans "Sent Messages" %}</a></li>
-    <li><a href="{% url 'messages_compose' %} ">&raquo;&nbsp;{% trans "New Message" %}</a></li>
-    <li><a href="{% url 'messages_trash' %} ">&raquo;&nbsp;{% trans "Trash" %}</a></li>
-</ul>
-{% endblock %}
-
+{% block body_class %}{% endblock %}
+{% block body %}{% endblock %}
 <br>
 <br>
 

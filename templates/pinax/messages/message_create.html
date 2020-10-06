@@ -1,0 +1,25 @@
+{% extends "base2.html" %}
+
+{% block body_class %}{{ block.super }}{% endblock %}
+
+{#{% load bootstrap %}#}
+
+{% block body %}
+    <div class="container">
+<div class="pinax-messages-create-container">
+    <h4>New Message</h4>
+
+    <form class="comment-form" action="{% url "pinax_messages:message_create" %}" method="post">
+        {% csrf_token %}
+        {{ form }}
+{#        <input type="hidden" name="subject" value={{ listing }} required="" id="id_subject">#}
+{#        <textarea name="content" cols="40" rows="10" required="" id="id_content"></textarea>#}
+
+        <div class="form-actions">
+            <a href="{% url "pinax_messages:inbox" %}" class="cancel">Cancel</a>
+            <button>Send</button>
+        </div>
+    </form>
+</div>
+    </div>
+{% endblock %}

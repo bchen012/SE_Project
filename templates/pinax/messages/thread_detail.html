@@ -1,0 +1,61 @@
+{% extends "base2.html" %}
+
+{% block body_class %}{{ block.super }}{% endblock %}
+
+{#{% load bootstrap %}#}
+
+{% block body %}
+    <div class="container">
+<div class="pinax-messages-thread-detail-container">
+    <h4 class="with-actions">
+
+        <div class="col s12 m7">
+    <div class="card horizontal  blue-grey lighten-5">
+      <div class="card-stacked">
+        <div class="card-content">
+          {{ thread.subject }}
+        </div>
+      </div>
+    </div>
+  </div>
+{#        <a class="button" href="{% url "pinax_messages:thread_delete" thread.pk %}">Delete Thread</a>#}
+    </h4>
+
+        {% for message in thread.messages.all %}
+
+      <div class="row">
+      {% if user.username == message.sender.username %}
+          <div class="col s6 offset-s6">
+      {% else %}
+          <div class="col s6 ">
+      {% endif %}
+    {{ user }}
+    <p>{{ message.sender.username }}</p>
+      <div class="card blue-grey darken-1">
+        <div class="card-content white-text">
+            <p>{{ message.content|urlize|linebreaks }}</p>
+            <p>{{ message.sent_at }}</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+{#                    <div class="message-from">{{ message.sender.username }}</div>#}
+{#                    <div class="message-sent">{{ message.sent_at }}</div>#}
+{#                <div class="message-content">{{ message.content|urlize|linebreaks }}</div>#}
+        {% endfor %}
+
+    <form class="comment-form" action="{% url "pinax_messages:thread_detail" thread.pk %}" method="post">
+        {% csrf_token %}
+        <textarea name="content" cols="40" rows="10" required="" id="id_content"></textarea>
+        <div class="form-actions">
+            <br>
+            <button class="waves-effect waves-light btn"><i class="material-icons left">send</i>Send</button>
+            <a href="{% url "pinax_messages:inbox" %}" class="cancel">Cancel</a>
+
+        </div>
+    </form>
+</div>
+    </div>
+    </div>
+{% endblock %}

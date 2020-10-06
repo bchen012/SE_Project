@@ -38,12 +38,15 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'django.contrib.humanize',
     'Home',
-    'Message',
-    'django_messages',
+    'pinax.messages',
     'django_plotly_dash.apps.DjangoPlotlyDashConfig',
     # 'channels',
     # 'channels_redis'
 ]
+
+CHAT_WS_SERVER_HOST = 'localhost'
+CHAT_WS_SERVER_PORT = 5002
+CHAT_WS_SERVER_PROTOCOL = 'ws'
 
 # X_FRAME_OPTIONS = 'SAMEORIGIN'
 #
@@ -84,6 +87,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'pinax.messages.context_processors.user_messages'
             ],
         },
     },
