@@ -56,8 +56,11 @@
                     {% if post.description %}
                     <span><i class="material-icons small">description</i>{{ post.description }}</span>
                     {% endif %}
-                    <a href="{% url "pinax_messages:message_user_create" post.user.id post.town post.flat_type %}" class="btn btn-default">Message this user</a>
-
+                    {% if user != post.user %}
+                        <br>
+                        <br>
+                    <a href="{% url "pinax_messages:message_user_create" post.user.id post.town post.flat_type %}" class="btn btn-default  blue darken-4">Message this user</a>
+                    {% endif %}
                 </div>
               </div>
             </div>

@@ -63,6 +63,9 @@
                 <span><i class="material-icons left small">contact_phone</i> {{ user.profile.contactNumber }}</span>
                 <br>
                 <br>
+                <span><i class="material-icons left small">date_range</i> Joined on {{ user.profile.date_joined|date:"F d, Y" }}</span>
+                <br>
+                <br>
             </div>
             <div class="card-reveal">
                 <span class="card-title grey-text text-darken-4">Edit Profile<i class="material-icons right">close</i></span>
@@ -70,7 +73,7 @@
               {% csrf_token %}
                   {{ u_form.as_p }}
                   {{ p_form.as_p }}
-                <button class ="btn btn-outline-info" type="submit">Submit</button>
+                <button class ="btn btn-outline-info blue darken-4" type="submit">Submit</button>
             </form>
             </div>
           </div>
