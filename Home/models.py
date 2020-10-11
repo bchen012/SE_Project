@@ -16,7 +16,7 @@ class Post(models.Model):
     date_posted = models.DateTimeField(default=timezone.now)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     town = models.CharField(max_length=25, choices=TOWN_CHOICES, default='ANG MO KIO')
-    floor_number = models.IntegerField(default=0)
+    floor_number = models.IntegerField(default=1)
     postal_code = models.IntegerField(default=0)
     address = models.TextField(blank=True, default=' ')
     flat_type = models.CharField(max_length=20, choices=FLAT_CHOICES, default='2-Room Flat')
