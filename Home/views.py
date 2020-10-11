@@ -9,9 +9,9 @@ import plotly.express as px
 import json
 import pandas as pd
 import requests
-from .forms import PostForm
+from .forms import PostForm, FilterForm
 from sklearn import linear_model
-from .towns import TOWN_CHOICES
+from django.views.generic.edit import FormView
 
 
 class Main(LoginRequiredMixin, ListView):
@@ -21,9 +21,20 @@ class Main(LoginRequiredMixin, ListView):
     template_name = 'Home/main.html'
     ordering = ['-date_posted']
 
+    def get_queryset(self):
+        filter_town = self.request.GET.get('filter_town')
+        filter_flat = self.request.GET.get('filter_flat')
+        print(filter_town)
+        print(filter_flat)
+        return Post.objects.all().order_by('-date_posted')
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['posts'] = Post.objects.all().order_by('-date_posted')
+        # context['posts'] = Post.objects.all().order_by('-date_posted')
+        context['form'] = FilterForm(initial={
+            'filter_town': self.request.GET.get('filter_town', ''),
+            'filter_flat': self.request.GET.get('filter_flat', ''),
+        })
         user = self.request.user
         context['user'] = user
         return context
@@ -45,12 +56,12 @@ def createPost(request):
             address = getAddress(form['postal_code'].value())
         if 'done' in request.POST:
             print(form.errors)
-            if form.is_valid():
+
+            if form.is_valid() and form.cleaned_data['address'] != '':
                 form.cleaned_data['address'] = address
                 instance = form.save(commit=False)
                 instance.user = request.user
                 instance.save()
-
                 return redirect('main')
     else:
         form = PostForm()

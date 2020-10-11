@@ -2,14 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from .towns import TOWN_CHOICES
-
-FLAT_CHOICES = (('Studio Apartment', 'Studio Apartment'),
-                ('2-Room Flat', '2-Room Flat'),
-                ('3-Room Flat', '3-Room Flat'),
-                ('4-Room Flat', '4-Room Flat'),
-                ('5-Room Flat', '5-Room Flat'),
-                ('Executive Flat', 'Executive Flat')
-                )
+from .flats import FLAT_CHOICES
 
 
 class Post(models.Model):
@@ -18,7 +11,7 @@ class Post(models.Model):
     town = models.CharField(max_length=25, choices=TOWN_CHOICES, default='ANG MO KIO')
     floor_number = models.IntegerField(default=1)
     postal_code = models.IntegerField(default=0)
-    address = models.TextField(blank=True, default=' ')
+    address = models.TextField(blank=True, default='')
     flat_type = models.CharField(max_length=20, choices=FLAT_CHOICES, default='2-Room Flat')
     floor_area = models.IntegerField(default=0)
     remaining_lease = models.IntegerField(default=0)
