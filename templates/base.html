@@ -1,6 +1,18 @@
 {% load static %}
 
 <html>
+
+<style>
+      body {
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+      }
+
+      main {
+        flex: 1 0 auto;
+  }
+</style>
     <head>
         <title>{% block title %}HOMEBASE{% endblock %}</title>
       <!-- Compiled and minified CSS -->
@@ -30,3 +42,29 @@
 {% endblock content%}
 
 
+<main></main>
+        <footer class="page-footer blue darken-4">
+          <div class="container">
+            <div class="row">
+              <div class="col l6 s12">
+                <h5 class="white-text">HOMEBASE</h5>
+                <p class="grey-text text-lighten-4">Find your dream home now</p>
+              </div>
+              <div class="col l4 offset-l2 s12">
+{#                <h5 class="white-text">Links</h5>#}
+                <ul>
+                  <li><a class="grey-text text-lighten-3" href="#!">About Homebase</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">Terms of Service</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">Get Support</a></li>
+{#                  <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>#}
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="footer-copyright">
+            <div class="container">
+            <i class="material-icons">copyright</i> Homebase 2020. All rights reserved.
+            <a class="grey-text text-lighten-4 right" href="#!"> <i class="material-icons">help</i></a>
+            </div>
+          </div>
+        </footer>

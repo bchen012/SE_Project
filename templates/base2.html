@@ -45,6 +45,16 @@
           width: 60%;
         }
 
+      body {
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+      }
+
+      main {
+        flex: 1 0 auto;
+  }
+
     </style>
 
 
@@ -57,9 +67,7 @@
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     </head>
 
-    <body>
 
-    </body>
   </html>
 <div class="navbar-fixed">
 <nav>
@@ -78,15 +86,18 @@
 </div>
 {#<a href="{% url 'pinax_messages:inbox' %}"><i class="material-icons medium"> inbox </i> </a>#}
 {#<a href="{% url 'pinax_messages:thread_detail' thread.pk %}"><i class="fa fa-envelope"></i> {% trans "View Message Thread" %}</a>#}
+    <body>
 
 {% block content %}
 
 {% endblock content%}
+
+</body>
 {% block body_class %}{% endblock %}
 {% block body %}{% endblock %}
 <br>
 <br>
-
+<main></main>
         <footer class="page-footer blue darken-4">
           <div class="container">
             <div class="row">
