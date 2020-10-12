@@ -24,13 +24,24 @@ class Main(LoginRequiredMixin, ListView):
     def get_queryset(self):
         filter_town = self.request.GET.get('filter_town')
         filter_flat = self.request.GET.get('filter_flat')
-        print(filter_town)
-        print(filter_flat)
-        return Post.objects.all().order_by('-date_posted')
+        print(filter_town, filter_flat)
+        if filter_flat is None and filter_town is None:
+            return Post.objects.all().order_by('-date_posted')
+        elif filter_flat == 'ALL' and filter_town == 'ALL':
+            return Post.objects.all().order_by('-date_posted')
+        elif filter_flat == 'ALL':
+            return Post.objects.filter(town=filter_town).order_by('-date_posted')
+        elif filter_town == 'ALL':
+            return Post.objects.filter(flat_type=filter_flat).order_by('-date_posted')
+        else:
+            return Post.objects.filter(town=filter_town, flat_type=filter_flat).order_by('-date_posted')
 
     def get_context_data(self, **kwargs):
+        filter_town = self.request.GET.get('filter_town')
+        filter_flat = self.request.GET.get('filter_flat')
         context = super().get_context_data(**kwargs)
-        # context['posts'] = Post.objects.all().order_by('-date_posted')
+        context['selectedFlatType'] = filter_flat
+        context['selectedTown'] = filter_town
         context['form'] = FilterForm(initial={
             'filter_town': self.request.GET.get('filter_town', ''),
             'filter_flat': self.request.GET.get('filter_flat', ''),
