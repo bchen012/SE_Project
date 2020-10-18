@@ -27,8 +27,9 @@
     <div class="main">
     <div class="container">
     <br>
-    <form class="row">
-    <h5>Town:</h5>
+       <div class="content-section">
+    <form>
+    <h5><i class="material-icons small">location_city</i> Town:</h5>
     <select class="browser-default" name="filter_town" id="id_filter_town">
       <option value="ALL" {% if selectedTown ==  'ANG MO KIO'%} selected {% endif %}>ALL</option>
       <option value="ANG MO KIO" {% if selectedTown ==  'ANG MO KIO'%} selected {% endif %}>ANG MO KIO</option>
@@ -58,7 +59,8 @@
       <option value="WOODLANDS"  {% if selectedTown ==  'WOODLANDS'%} selected {% endif %}>WOODLANDS</option>
       <option value="YISHUN"  {% if selectedTown ==  'YISHUN'%} selected {% endif %}>YISHUN</option>
     </select>
-    <h5>Flat:</h5>
+
+    <h5><i class="material-icons small">view_compact</i>  Flat Type:</h5>
   <select class="browser-default" name="filter_flat" id="id_filter_flat">
       <option value="ALL" {% if selectedFlatType == 'Studio Apartment' %} selected {% endif %}>ALL</option>
       <option value="Studio Apartment" {% if selectedFlatType == 'Studio Apartment' %} selected {% endif %}>Studio Apartment</option>
@@ -68,10 +70,11 @@
       <option value="5-Room Flat" {% if selectedFlatType == '5-Room Flat' %} selected {% endif %}>5-Room Flat</option>
       <option value="Executive Flat" {% if selectedFlatType == 'Executive Flat' %} selected {% endif %}>Executive Flat</option>
     </select>
+    <br>
 <button class="waves-effect waves-light btn blue darken-4" type="submit"><i class="material-icons left">search</i>Apply Filter</button>
     </form>
     <br>
-    <div class="content-section">
+
     <br>
     {% for post in page_obj %}
                 <div class="row">

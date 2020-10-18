@@ -97,7 +97,7 @@ def updatePost(request, id):
             address = getAddress(form['postal_code'].value())
         if 'done' in request.POST:
             print(form.errors)
-            if form.is_valid():
+            if form.is_valid() and form.cleaned_data['address'] != '':
                 form.cleaned_data['address'] = address
                 form.save()
                 return redirect('profile')

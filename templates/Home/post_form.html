@@ -50,11 +50,11 @@
 
         <div class="fieldWrapper">
     <span><h5><i class="material-icons small">location_on</i> Postal Code:  </h5>  </span>
-    {% if post %}
-        <input type="number" name="postal_code" value={{ post.postal_code }} required="" id="id_postal_code">
-    {% else %}
+{#    {% if post %}#}
+{#        <input type="number" name="postal_code" value={{ post.postal_code }} required="" id="id_postal_code">#}
+{#    {% else %}#}
         {{ form.postal_code }}
-    {% endif %}
+{#    {% endif %}#}
 </div>
 <br>
           <button class ="btn btn-outline-info blue darken-4" name="postalCode" type="submit">Get Address</button>

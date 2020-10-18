@@ -30,13 +30,11 @@ class InboxView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        if self.kwargs.get("deleted", None):
-            threads = Thread.ordered(Thread.deleted(self.request.user))
-            folder = "deleted"
-        else:
-            threads = Thread.ordered(Thread.inbox(self.request.user))
-            folder = "inbox"
-
+        threads1 = Thread.ordered(Thread.deleted(self.request.user))
+        print(type(threads1))
+        threads2 = Thread.ordered(Thread.inbox(self.request.user))
+        folder = "inbox"
+        threads = threads1 + threads2
         context.update({
             "folder": folder,
             "threads": threads,
