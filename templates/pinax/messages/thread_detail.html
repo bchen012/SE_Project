@@ -5,19 +5,17 @@
 {#{% load bootstrap %}#}
 
 {% block body %}
+
+        <div class="card horizontal  white">
+        <div class="card-content">
+            <h5>{{ thread.subject }}</h5>
+        </div>
+    </div>
+
     <div class="container">
 <div class="pinax-messages-thread-detail-container">
     <h4 class="with-actions">
 
-        <div class="col s12 m7">
-    <div class="card horizontal  blue-grey lighten-5">
-      <div class="card-stacked">
-        <div class="card-content">
-          {{ thread.subject }}
-        </div>
-      </div>
-    </div>
-  </div>
 {#        <a class="button" href="{% url "pinax_messages:thread_delete" thread.pk %}">Delete Thread</a>#}
     </h4>
 
@@ -29,12 +27,18 @@
       {% else %}
           <div class="col s6 ">
       {% endif %}
-{#    {{ user }}#}
-    <p>{{ message.sender.username }}</p>
-      <div class="card blue-grey darken-1">
+    <img class="circle" src="{{ message.sender.profile.image.url }}"  width="60" height="60">
+    <b>{{ message.sender.username }}</b>
+        <p><small>{{ message.sent_at }}</small></p>
+         {% if user.username == message.sender.username %}
+          <div class="card blue darken-4">
+      {% else %}
+          <div class="card blue-grey darken-1">
+      {% endif %}
+
+
         <div class="card-content white-text">
             <p>{{ message.content|urlize|linebreaks }}</p>
-            <p>{{ message.sent_at }}</p>
         </div>
       </div>
 

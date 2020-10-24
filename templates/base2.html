@@ -36,6 +36,14 @@
         }
 
 
+        .text {
+          display: block;
+          width: 200px;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+
 
         .responsive {
           padding: 0 6px;
@@ -78,7 +86,7 @@
         <li><a style="color: black" href="{% url 'post-create' %}">Post</a></li>
           <li><a style="color: black" href="{% url 'profile'%}">Profile</a></li>
         <li><a style="color: black" href="{% url 'logout' %}">Logout</a></li>
-          <li><a style="color: black" href="{% url 'pinax_messages:inbox' %}"><i class="material-icons small"> inbox </i></a></li>
+          <li><a style="color: black" href="{% url 'pinax_messages:inbox' %}"><i class="material-icons small"> mail_outline </i></a></li>
 
       </ul>
     </div>

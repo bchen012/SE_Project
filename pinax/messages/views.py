@@ -29,16 +29,19 @@ class InboxView(TemplateView):
         return super().dispatch(*args, **kwargs)
 
     def get_context_data(self, **kwargs):
+        currentUser = self.request.user
         context = super().get_context_data(**kwargs)
-        threads1 = Thread.ordered(Thread.deleted(self.request.user))
+        threads1 = Thread.ordered(Thread.deleted(currentUser))
         print(type(threads1))
-        threads2 = Thread.ordered(Thread.inbox(self.request.user))
+        threads2 = Thread.ordered(Thread.inbox(currentUser))
         folder = "inbox"
         threads = threads1 + threads2
+
         context.update({
             "folder": folder,
             "threads": threads,
-            "threads_unread": Thread.ordered(Thread.unread(self.request.user))
+            "threads_unread": Thread.ordered(Thread.unread(currentUser)),
+            "currentUser": currentUser,
         })
         return context
 
@@ -51,7 +54,8 @@ class ThreadView(UpdateView):
     form_class = MessageReplyForm
     context_object_name = "thread"
     template_name = "pinax/messages/thread_detail.html"
-    success_url = reverse_lazy("pinax_messages:inbox")
+    # success_url = reverse_lazy("pinax_messages:inbox")
+    # success_url = "thread_detail"
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -68,12 +72,15 @@ class ThreadView(UpdateView):
             "user": self.request.user,
             "thread": self.object
         })
+        # print(self.object.userthread_set)
         return kwargs
 
     def get(self, request, *args, **kwargs):
         response = super().get(request, *args, **kwargs)
         self.object.userthread_set.filter(user=request.user).update(unread=False)
         return response
+
+    # def get_context_data(self, **kwargs):
 
 
 class MessageCreateView(CreateView):

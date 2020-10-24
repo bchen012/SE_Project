@@ -42,7 +42,6 @@ class NewMessageForm(forms.ModelForm):
         fields = ["to_user", "subject", "content"]
 
 
-
 class NewMessageFormMultiple(forms.ModelForm):
     subject = forms.CharField()
     to_user = UserModelMultipleChoiceField(get_user_model().objects.none())
@@ -74,8 +73,20 @@ class MessageReplyForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
 
     def save(self, commit=True):
+        content = ""
+        count = 0
+        for i in self.cleaned_data["content"]:
+            if i == '\n':
+                content += ' '
+            else:
+                content += i
+            count += 1
+            if i == ' ' and count >= 30:
+                content += '\n'
+                count = 0
+
         return Message.new_reply(
-            self.thread, self.user, self.cleaned_data["content"]
+            self.thread, self.user, content
         )
 
     class Meta:

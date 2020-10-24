@@ -13,24 +13,26 @@
             Inbox
         </h4>
 {#        {{threads}}#}
-        <div class="collection">
+        <ul class="collection">
+
             {% for thread in threads %}
-{#                            <div class="thread {% if thread|unread:user %}unread{% endif %}">#}
-                <a href="{{thread.get_absolute_url}}"class="collection-item">
-                <span class="badge">{{ thread.latest_message.content }}</span>
-                    {#                    <div class="participants">{{ thread.users.all|join:", " }}</div>#}
+                <a class="collection-item avatar" href="{{thread.get_absolute_url}}">
+                {% for user in thread.users.all %}
+                    {% if user != currentUser %}
+                        <img class="responsive-img circle" src="{{ user.profile.image.url }}"  width="60" height="60">
+                        {{ user }}
+                    {% endif %}
+                {% endfor %}
+
+                <span class="text badge">{{ thread.latest_message.content }}</span>
                         <p>{{ thread.subject }}</p>
                 </a>
-{#                <a href="#!" class="collection-item"><span class="badge">1</span>Alan</a>#}
-{#                <a href="#!" class="collection-item"><span class="new badge">4</span>Alan</a>#}
-{#                <a href="#!" class="collection-item">Alan</a>#}
-{#                <a href="#!" class="collection-item"><span class="badge">14</span>Alan</a>#}
-{#                </div>#}
+
 
             {% empty %}
             <div class="no-messages">You have no messages.</div>
         {% endfor %}
-    </div>
+    </ul>
 </div>
     </div>
 {% endblock %}
