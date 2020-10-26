@@ -1,9 +1,9 @@
+from django.http import Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Post
 from users.models import Profile
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView,DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.shortcuts import reverse
 from plotly.offline import plot
 import plotly.express as px
 import json
@@ -11,7 +11,6 @@ import pandas as pd
 import requests
 from .forms import PostForm, FilterForm
 from sklearn import linear_model
-from django.views.generic.edit import FormView
 
 
 class Main(LoginRequiredMixin, ListView):
@@ -82,6 +81,8 @@ def createPost(request):
 
 def updatePost(request, id):
     post = get_object_or_404(Post, id=id)
+    if post.user != request.user:
+        raise Http404  # or similar
     address = post.address
     recommendedPrice = post.recommended_price
     town = post.town
