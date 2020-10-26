@@ -32,6 +32,7 @@ urlpatterns = [
     path('main/', home_views.Main.as_view(), name='main'),
     path('post/new/', home_views.createPost, name='post-create'),
     path('profile/', user_views.profile, name='profile'),
+    path('user-profile/<str:username>', user_views.users_profile, name='users-profile'),
     path('view_post/<int:id>', home_views.postView, name='view_post'),
     path('favorite/<int:id>', home_views.favoritePost, name='favorite'),
     path('unfavorite/<int:id>', user_views.unfavorite, name='unfavorite'),

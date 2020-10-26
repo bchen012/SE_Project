@@ -71,7 +71,7 @@
       <option value="Executive Flat" {% if selectedFlatType == 'Executive Flat' %} selected {% endif %}>Executive Flat</option>
     </select>
     <br>
-<button class="waves-effect waves-light btn blue darken-4" type="submit"><i class="material-icons left">search</i>Apply Filter</button>
+<button class="waves-effect waves-light btn blue darken-4" type="submit">Apply Filter <i class="material-icons right">search</i></button>
     </form>
     <br>
 
@@ -87,8 +87,15 @@
                 </div>
                 <div class="card-content">
                     <span class="card-title activator grey-text text-darken-4">
+                        {% if post.user == user %}
+                        <a href="{% url 'profile' %}">
+                    {% else %}
+                         <a href="{% url 'users-profile' post.user.username %}">
+                    {% endif %}
                         <img class="circle" src="{{ post.user.profile.image.url }}" width="60" height="60">
-                    <b>{{ post.user }}</b>
+
+                    {{ post.user }}</a>
+{#                        <b>{{ post.user }}</b>#}
                     <br>
                         <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
                         </span>
@@ -104,7 +111,7 @@
                     {% if user != post.user %}
                         <br>
                         <br>
-                    <a href="{% url "pinax_messages:message_user_create" post.user.id post.town post.flat_type %}" class="btn btn-default  blue darken-4">Message this user</a>
+                        <a href="{% url "pinax_messages:message_user_create" post.user.id post.town post.flat_type %}" class="btn btn-default white-text blue darken-4">Message this user <i class="material-icons right"> message </i> </a>
                     {% endif %}
                 </div>
               </div>

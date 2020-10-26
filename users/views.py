@@ -28,8 +28,8 @@ def register(request):
 
 def users_profile(request, username):
     user = User.objects.get(username=username)
-    profile = Profile.objects.get(username=username)
-    posts = Post.objects.filter(user=request.user)
+    profile = Profile.objects.get(user=user)
+    posts = Post.objects.filter(user=user)
     context = {'profile': profile,
                'user': user,
                'posts': posts,

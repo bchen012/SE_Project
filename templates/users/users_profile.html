@@ -52,8 +52,10 @@
 
           <div class="card">
             <div class="card-content">
+                {% if u_form %}
                 <span class="card-title activator"><i class="material-icons right">edit</i></span>
                 <br>
+                {% endif %}
                 <span><i class="material-icons left small">person</i> {{ user.first_name }} {{ user.last_name }}</span>
                 <br>
                 <br>
@@ -107,13 +109,16 @@
                     {% endif %}
                     <br>
                     <br>
-                    <a class="waves-effect waves-light btn blue darken-4" href={% url 'post-update' post.id %}><i class="material-icons right">edit</i>edit</a>
-                    <a class="waves-effect waves-light btn blue darken-4"  href={% url 'post-delete' post.id %} ><i class="material-icons right">delete</i>delete</a>
+                {% if u_form %}
+                    <a class="waves-effect waves-light btn white-text blue darken-4" href={% url 'post-update' post.id %}><i class="material-icons right">edit</i>edit</a>
+                    <a class="waves-effect waves-light btn white-text blue darken-4"  href={% url 'post-delete' post.id %} ><i class="material-icons right">delete</i>delete</a>
+                {% endif %}
                 </div>
               </div>
         {% endfor %}
     {% endif %}
 
+    {% if u_form %}
         <h4>Favorites</h4>
         <br>
         {% for post in profile.favorites.all %}
@@ -141,11 +146,11 @@
                     {% endif %}
                     <br>
                     <br>
-                    <a class="waves-effect waves-light btn blue darken-4" href={% url 'unfavorite' post.id %}><i class="material-icons right"></i>unfavorite</a>
+                    <a class="waves-effect waves-light btn blue darken-4 white-text" href={% url 'unfavorite' post.id %}><i class="material-icons right"></i>unfavorite</a>
                 </div>
               </div>
         {% endfor %}
-
+    {% endif %}
     </div>
 </div>
 {% endblock content %}
