@@ -1,3 +1,4 @@
+from django.core.validators import MinValueValidator
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
@@ -9,13 +10,13 @@ class Post(models.Model):
     date_posted = models.DateTimeField(default=timezone.now)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     town = models.CharField(max_length=25, choices=TOWN_CHOICES, default='ANG MO KIO')
-    floor_number = models.IntegerField(default=1)
-    postal_code = models.IntegerField(default=0)
+    floor_number = models.IntegerField(default=1, validators=[MinValueValidator(0)])
+    postal_code = models.IntegerField(default=0, validators=[MinValueValidator(0)])
     address = models.TextField(blank=True, default='')
     flat_type = models.CharField(max_length=20, choices=FLAT_CHOICES, default='2-Room Flat')
-    floor_area = models.IntegerField(default=0)
-    remaining_lease = models.IntegerField(default=0)
-    price = models.IntegerField(default=0)
+    floor_area = models.IntegerField(default=0, validators=[MinValueValidator(0)])
+    remaining_lease = models.IntegerField(default=0, validators=[MinValueValidator(0)])
+    price = models.IntegerField(default=0, validators=[MinValueValidator(0)])
     recommended_price = models.IntegerField(default=0)
     description = models.TextField(blank=True)
     display_image = models.ImageField(upload_to='home_images', default='default_home.png')
