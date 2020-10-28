@@ -45,6 +45,7 @@
       <option value="YISHUN"  {% if selectedTown ==  'YISHUN'%} selected {% endif %}>YISHUN</option>
 </select>
     </div>
+    {{ form.town.errors }}
         <br>
 
 
@@ -54,6 +55,7 @@
 {#        <input type="number" name="postal_code" value={{ post.postal_code }} required="" id="id_postal_code">#}
 {#    {% else %}#}
         {{ form.postal_code }}
+        {{ form.postal_code.errors }}
 {#    {% endif %}#}
 </div>
 <br>
@@ -72,6 +74,7 @@
 <div class="fieldWrapper">
     <span><h5><i class="material-icons small">swap_vert</i> Floor Level:  </h5>  </span>
     {{ form.floor_number }}
+    {{ form.floor_number.errors }}
 </div>
         <br>
 <div class="fieldWrapper">
@@ -84,16 +87,19 @@
       <option value="5-Room Flat" {% if selectedFlatType == '5-Room Flat' %} selected {% endif %}>5-Room Flat</option>
       <option value="Executive Flat" {% if selectedFlatType == 'Executive Flat' %} selected {% endif %}>Executive Flat</option>
     </select>
+    {{ form.flat_type.errors }}
 </div>
 <br>
         <div class="fieldWrapper">
         <span><h5><i class="material-icons small">straighten</i> Floor Area (square meters): </h5>  </span>
         {{ form.floor_area }}
+        {{ form.floor_area.errors }}
         </div>
 <br>
         <div class="fieldWrapper">
         <span><h5><i class="material-icons small">access_time</i> Remaining Lease (years):  </h5>  </span>
         {{ form.remaining_lease }}
+        {{ form.remaining_lease.errors }}
         </div>
 <br>
           <button class ="btn btn-outline-info blue darken-4" name="predictPrice" type="submit">Get Recommended Price</button>
@@ -102,6 +108,7 @@
         <div class="fieldWrapper">
         <span><h5><i class="material-icons small">attach_money</i> Price:  </h5>  </span>
         {{ form.price }}
+        {{ form.price.errors }}
         </div>
 <br>
 <br>

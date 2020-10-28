@@ -1,21 +1,39 @@
-from django.core.validators import MinValueValidator
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
-from .towns import TOWN_CHOICES
-from .flats import FLAT_CHOICES
+from .towns import TOWN_CHOICES, TOWN_LIST
+from .flats import FLAT_CHOICES, FLAT_LIST
+from django.core.exceptions import ValidationError
+from django.utils.translation import gettext_lazy as _
+
+
+def validate_town(value):
+    if value not in TOWN_LIST:
+        raise ValidationError(
+            _('%(value)s is not a valid town'),
+            params={'value': value},
+        )
+
+
+def validate_flat(value):
+    if value not in FLAT_LIST:
+        raise ValidationError(
+            _('%(value)s is not a valid town'),
+            params={'value': value},
+        )
 
 
 class Post(models.Model):
     date_posted = models.DateTimeField(default=timezone.now)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    town = models.CharField(max_length=25, choices=TOWN_CHOICES, default='ANG MO KIO')
-    floor_number = models.IntegerField(default=1, validators=[MinValueValidator(0)])
-    postal_code = models.IntegerField(default=0, validators=[MinValueValidator(0)])
+    town = models.CharField(max_length=25, choices=TOWN_CHOICES, default='ANG MO KIO', validators=[validate_town])
+    floor_number = models.IntegerField(default=1, validators=[MinValueValidator(1), MaxValueValidator(100)])
+    postal_code = models.IntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(999999)])
     address = models.TextField(blank=True, default='')
-    flat_type = models.CharField(max_length=20, choices=FLAT_CHOICES, default='2-Room Flat')
-    floor_area = models.IntegerField(default=0, validators=[MinValueValidator(0)])
-    remaining_lease = models.IntegerField(default=0, validators=[MinValueValidator(0)])
+    flat_type = models.CharField(max_length=20, choices=FLAT_CHOICES, default='2-Room Flat', validators=[validate_flat])
+    floor_area = models.IntegerField(default=1, validators=[MinValueValidator(1), MaxValueValidator(200)])
+    remaining_lease = models.IntegerField(default=1, validators=[MinValueValidator(0), MaxValueValidator(99)])
     price = models.IntegerField(default=0, validators=[MinValueValidator(0)])
     recommended_price = models.IntegerField(default=0)
     description = models.TextField(blank=True)
