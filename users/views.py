@@ -29,7 +29,7 @@ def register(request):
 def users_profile(request, username):
     user = User.objects.get(username=username)
     profile = Profile.objects.get(user=user)
-    posts = Post.objects.filter(user=user)
+    posts = Post.objects.filter(user=user).order_by('-date_posted')
     context = {'profile': profile,
                'user': user,
                'posts': posts,
@@ -41,7 +41,7 @@ def users_profile(request, username):
 def profile(request):
     user = request.user
     profile = Profile.objects.get(user=user)
-    posts = Post.objects.filter(user=request.user)
+    posts = Post.objects.filter(user=request.user).order_by('-date_posted')
     if request.method == 'POST':
         u_form = UserUpdateForm(request.POST, instance=request.user)
         p_form = ProfileUpdateForm(request.POST,

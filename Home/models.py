@@ -19,7 +19,7 @@ def validate_town(value):
 def validate_flat(value):
     if value not in FLAT_LIST:
         raise ValidationError(
-            _('%(value)s is not a valid town'),
+            _('%(value)s is not a valid flat type'),
             params={'value': value},
         )
 

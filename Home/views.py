@@ -53,6 +53,7 @@ class Main(LoginRequiredMixin, ListView):
 
 
 def createPost(request):
+    form = PostForm()
     address = ' '
     recommendedPrice = 0
     town = 'ANG MO KIO'
@@ -63,14 +64,15 @@ def createPost(request):
         flat_type = form['flat_type'].value()
         floor_area = form['floor_area'].value()
         remaining_lease = form['remaining_lease'].value()
-        if town in TOWN_LIST and flat_type in FLAT_LIST:
+        recommendedPrice = form['recommended_price'].value()
+        address = form['address'].value()
+        if 'predictPrice' in request.POST and town in TOWN_LIST and flat_type in FLAT_LIST:
             recommendedPrice = getRecommendedPrice(town, flat_type, floor_area, remaining_lease)
-        if 'postalCode' in request.POST or 'predictPrice' in request.POST:
+        elif 'postalCode' in request.POST:
             postal_code = form['postal_code'].value()
             if 0 <= int(postal_code) <= 999999:
                 address = getAddress(form['postal_code'].value())
-            else:
-                address = form['address'].value()
+
         if 'done' in request.POST:
             print(form.errors)
 
@@ -81,8 +83,7 @@ def createPost(request):
                 instance.user = request.user
                 instance.save()
                 return redirect('main')
-    else:
-        form = PostForm()
+
     return render(request, 'Home/post_form.html', {'form': form, 'address': address, 'selectedFlatType': flat_type,
                                                    'recommendedPrice': recommendedPrice, 'selectedTown': town})
 
@@ -101,14 +102,14 @@ def updatePost(request, id):
         flat_type = form['flat_type'].value()
         floor_area = form['floor_area'].value()
         remaining_lease = form['remaining_lease'].value()
-        if town in TOWN_LIST and flat_type in FLAT_LIST:
+        recommendedPrice = form['recommended_price'].value()
+        address = form['address'].value()
+        if 'predictPrice' in request.POST and town in TOWN_LIST and flat_type in FLAT_LIST:
             recommendedPrice = getRecommendedPrice(town, flat_type, floor_area, remaining_lease)
-        if 'postalCode' in request.POST or 'predictPrice' in request.POST:
+        elif 'postalCode' in request.POST:
             postal_code = form['postal_code'].value()
             if 0 <= int(postal_code) <= 999999:
                 address = getAddress(form['postal_code'].value())
-            else:
-                address = form['address'].value()
         if 'done' in request.POST:
             print(form.errors)
             if form.is_valid() and form.cleaned_data['address'] != '':
