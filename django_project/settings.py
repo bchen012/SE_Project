@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'Home',
     'pinax.messages',
-    'django_plotly_dash.apps.DjangoPlotlyDashConfig',
+    # 'django_plotly_dash.apps.DjangoPlotlyDashConfig',
     # 'channels',
     # 'channels_redis'
 ]
