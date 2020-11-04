@@ -6,6 +6,8 @@ from .models import Profile
 
 class UserRegisterForm(UserCreationForm):
     email = forms.EmailField()
+    first_name = forms.CharField(required=True)
+    last_name = forms.CharField(required=True)
 
     class Meta:
         model = User
@@ -16,6 +18,7 @@ class UserRegisterForm(UserCreationForm):
             'last_name': forms.TextInput(attrs={'autocomplete': 'off'}),
             'email': forms.TextInput(attrs={'autocomplete': 'off'})
         }
+
 
     def __init__(self, *args, **kwargs):
         super(UserCreationForm, self).__init__(*args, **kwargs)
